@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Dashboard from "./Dashboard"
 import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
-
+//teste commit
 function App() {
   return( 
         <Container 
@@ -19,7 +19,9 @@ function App() {
               <AuthProvider>
                 <Routes>
                   <Route element={<PrivateRoute/>} >
-                      <Route path='/' element= {<Dashboard />}/>
+                      <Routes>
+                        <Route path='/' element= {<Dashboard />}/>
+                      </Routes>
                   </Route>
                   <Route path="/signup" element={<Signup />}/>
                   <Route path="/login" element={<Login />}/>
