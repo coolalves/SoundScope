@@ -15,25 +15,25 @@ function App() {
         className="d-flex align-items-center justify-content-center" 
         style={{minHeight: "100vh"}}
         >
-          <div className="w-100 " style={{ maxWidth: '400px'}}>
-            <Router>
-            <AuthProvider>
-    <Routes>
-      <Route
-        element={(
-          <PrivateRoute>
-            <Routes>
-              <Route path='/' element={<Dashboard />} />
-            </Routes>
-          </PrivateRoute>
-        )} 
-      />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
-  </AuthProvider>
-            </Router>
-          </div>
+<div className="w-100 " style={{ maxWidth: '400px'}}>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path='/'
+            element={(
+              <PrivateRoute>
+                <Routes>
+                  <Route path='/' element={<Dashboard />} />
+                </Routes>
+              </PrivateRoute>
+            )} 
+          />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+    </AuthProvider>
+    </Router>
+</div>
         </Container>
   ) 
 }
