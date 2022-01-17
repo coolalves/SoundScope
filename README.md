@@ -11,4 +11,6 @@
 
 ## npm install redux-thunk
 
+## npm install redux-firestore
+
 ## npm install react-redux-firebase
