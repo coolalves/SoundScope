@@ -8,3 +8,5 @@
 ## vou agora tratar das apis, carlos trata dos estilos
 
 ## npm install redux react-redux
+
+## npm install redux-thunk
