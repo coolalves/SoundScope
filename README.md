@@ -6,3 +6,5 @@
 ### e falta receber mail de verificação de conta!
 
 ## vou agora tratar das apis, carlos trata dos estilos
+
+## npm install redux react-redux
