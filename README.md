@@ -11,4 +11,4 @@
 
 ## npm install redux-thunk
 
-##npm install react-redux-firebase
+## npm install react-redux-firebase
