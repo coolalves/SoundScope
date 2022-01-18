@@ -15,6 +15,7 @@ const app = firebase.initializeApp({
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = firebase.storage();
 
 export const createUserDocument = async (user, additionalData) => {
   if (!user) return;
