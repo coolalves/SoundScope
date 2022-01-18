@@ -1,14 +1,15 @@
 import React from "react"
-import Signup from "./Signup"
+import Signup from "../components/authentication/Signup"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from "react-bootstrap";
-import { AuthProvider } from "../contexts/AuthContext"
+import { AuthProvider } from "../components/authentication/AuthContext"
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import Dashboard from "./Dashboard"
-import Login from "./Login"
-import PrivateRoute from "./PrivateRoute"
-import ForgotPassword from "./ForgotPassword";
-import UpdateProfile from "./UpdateProfile";
+import Dashboard from "./structure/Dashboard"
+import Login from "../components/authentication/Login"
+import PrivateRoute from "./routes/PrivateRoute"
+import ForgotPassword from "../components/authentication/ForgotPassword";
+import UpdateProfile from "./structure/UpdateProfile";
+//import Navbar from "./Navbar";
 
 function App() {
   return( 
