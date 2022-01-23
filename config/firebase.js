@@ -2,6 +2,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/firestore'
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
+
 
 const app = firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -13,8 +15,19 @@ const app = firebase.initializeApp({
     appId: process.env.REACT_APP_FIREBASE_APP_ID
 })
 
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = getStorage();
+//storage
+export async function upload(file, currentUser, setLoading){
+  const fileRef = ref(storage, currentUser.uid + '.png')
+  
+  setLoading(true)
+  const snapshot = await uploadBytes(fileRef, file)
+  setLoading(false)
+  alert("Uploaded File!")
+}
 
 export const createUserDocument = async (user, additionalData) => {
   if (!user) return;
@@ -34,9 +47,13 @@ export const createUserDocument = async (user, additionalData) => {
         createdAt: new Date(),
       });
     } catch (error) {
-      console.log('Error in creating user', error);
+      console.log('Error creating user', error);
     }
   }
 };
+
+
+
  
 export default app
+

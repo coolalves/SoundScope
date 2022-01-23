@@ -9,6 +9,7 @@ import Login from "../components/authentication/Login"
 import PrivateRoute from "./routes/PrivateRoute"
 import ForgotPassword from "../components/authentication/ForgotPassword";
 import UpdateProfile from "./structure/UpdateProfile";
+import ProfilePicture from "./structure/ProfilePicture";
 //import Navbar from "./Navbar";
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/profile-picture" element={<ProfilePicture />} />
         </Routes>
     </AuthProvider>
     </Router>
