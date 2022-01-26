@@ -1,79 +1,82 @@
-import React, { Component } from 'react';
-import { auth, createUserDocument } from '../../config/firebase';
-import {Form, Button, Card, Alert} from 'react-bootstrap';
+import React, {useState} from 'react'
+import {Form, Button, Card} from 'react-bootstrap';
+import {register, colRef} from '../../config/firebase'
 import { Link, useNavigate } from 'react-router-dom'
+import { addDoc } from 'firebase/firestore'
 
-class Signup extends Component {
-  state = { displayName: '', email: '', password: '' };
+export function get(user = ""){
+  return window.sessionStorage.getItem(user)
+}
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
+export function useVerify(x='')
+{
+  window.sessionStorage.getItem(x)
+  
+  if (window.sessionStorage.getItem(x) != null)
+    return true
+  else return false
+}
 
-    this.setState({ [name]: value });
-  };
+export function useGetStorage(x='')
+{
+  return window.sessionStorage.getItem(x)
+}
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password, displayName } = this.state;
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log(user);
-      await createUserDocument(user, { displayName });
-    } catch (error) {
-      console.log('error', error);
+export default function Login() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState("")
+    const navigate = useNavigate()
+    const [dados, setDados] = useState('')
+    const UserParam = (i) => {
+      setDados(i)
     }
+    console.log(dados)
 
-    this.setState({ displayName: '', email: '', password: '' });
-  };
+    const createUserProfile = async () =>{
+        await addDoc(colRef, 
+          {
+            username: username,
+            email: email,
+          })
+      }
 
-  render() {
-    const { displayName, email, password } = this.state;
     return (
-      <>
-        <Card>
-        <Card.Body> 
-        <h2 className="text-center mb-4">Signup</h2>
-        
-            <Form className="signup-login" onSubmit={this.handleSubmit}>
-            <Form.Group id="username">
-              <Form.Label>Username</Form.Label>
-              <Form.Control type="name"
-                  name="displayName"
-                  value={displayName}
-                  onChange={this.handleChange}
-                  placeholder="" required/>
+        <>
+      <Card>
+        <Card.Body>
+          <Form>
+          <h2 className="text-center mb-4">Welcome</h2>
+          <Form.Group id="username">
+              <Form.Label>username</Form.Label>
+              <Form.Control type="username"  value={username} onChange={(e) => {setUsername(e.target.value.trim())}} required />
             </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email"
-                  name="email"
-                  value={email}
-                  onChange={this.handleChange}
-                  placeholder="" required />
+              <Form.Control type="email"  value={email} onChange={(e) => {setEmail(e.target.value.trim())}} required />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password"
-                  name="password"
-                  value={password}
-                  onChange={this.handleChange}
-                  placeholder="" required />
-
+              <Form.Control type="password"  value={password} onChange={(e) => {setPassword(e.target.value)}} required />
             </Form.Group>
-          
-            <Button className="w-100" type="submit">Signup</Button>
-            </Form>
-            </Card.Body>
-        </Card>
-        <div className="w-100 text-center mt-2">
-              Already have an account? <Link to="/login">Login</Link>
-        </div>
-      </>
-    );
-  }
+            <Button 
+            onClick={async e => {
+              e.preventDefault()
+                   await register(email, password)
+                  .then(async (response) => {alert('Successfully Registered'); UserParam(response.user.uid); createUserProfile(); navigate('/dashboard/')})
+                  .catch((error) => alert(error.message))
+          }}
+            className="w-100 " type="submit">
+              Register
+            </Button>
+            
+          </Form>
+          <div className="w-100 text-center mt-2">
+            Need an account? <Link to="/signup">Sign Up</Link>
+          </div>
+        </Card.Body>
+      </Card>
+     
+    </>
+    )
 }
-
-export default Signup;
