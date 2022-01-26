@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
+/*import React, {useEffect, useState} from 'react'
 import {useAuth} from '../authentication/AuthContext'
-import upload  from '../../config/firebase'
+import {uploadFiles}  from '../../config/firebase'
 
 export default function ProfilePicture() {
-  const  currentUser = useAuth()
+  //const  currentUser = useAuth()
   const [photo, setPhoto] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [photoURL, setPhotoURL] = useState("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png")
+  //const [photoURL, setPhotoURL] = useState()
   
   
   function handleChange(e){
@@ -16,23 +16,18 @@ export default function ProfilePicture() {
     }
 
   function handleClick(){
-        upload(photo, currentUser, setLoading)
+      uploadFiles(photo, setLoading)
     }
 
-   useEffect(()=>{
-    if (currentUser && currentUser.photoURL){
-        setPhotoURL(currentUser.photoURL)
-    }    
-    
-
-   }, [currentUser])  
+   
 
     
   return (
     <>
       <input type="file" onChange={handleChange} />
       <button disabled={loading || !photo} onClick={handleClick}>Upload</button>
-      <img src={photoURL} alt="Avatar" className='avatar'/> 
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" className='avatar'/> 
     </>
     )
 }
+*/
