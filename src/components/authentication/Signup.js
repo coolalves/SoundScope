@@ -4,9 +4,9 @@ import {register, colRef} from '../../config/firebase'
 import { Link, useNavigate } from 'react-router-dom'
 import { addDoc } from 'firebase/firestore'
 
-export function UseStorage(x='')
+export function UseStorage(x='', y='')
 {
-    window.sessionStorage.setItem(x)
+    window.sessionStorage.setItem(x, y)
 }
 
 export function get(user = ""){
@@ -76,7 +76,7 @@ export default function Login() {
                         username: username,
                         email: email
                     });
-                  UseStorage('username', response.user.username);
+                  UseStorage('username', response.user.displayName);
                   UseStorage('useremail', response.user.email);  
                   UseStorage('id', response.user.uid);
                   navigate('/dashboard/')})

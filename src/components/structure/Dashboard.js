@@ -1,36 +1,52 @@
 import React from 'react'
 import {Card, Button, Alert} from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { logout } from '../../config/firebase'
+import { logout, colRef } from '../../config/firebase'
 import { get } from '../authentication/Login'
-import { useAuth } from '../../config/firebase'
-import { useState, useEffect } from 'react'
 import {userParam} from "../authentication/Signup"
+import { onSnapshot, query, where, docs } from 'firebase/firestore'
+import { useState, useEffect } from 'react'
+
+
 
 export default function Dashboard() {
     
-   const name = window.sessionStorage.getItem("username")
-   const email = window.sessionStorage.getItem("useremail")
-   const uid = window.sessionStorage.getItem("id")
-   // UserData(userInfo)
+    //const [error, setError] = useState(null) 
+    const [loading, setLoading] = useState(false)
+    const [name, setName] = useState("")
+    const email = window.sessionStorage.getItem("useremail")
+    const uid = window.sessionStorage.getItem("id")
+    const navigate = useNavigate()  
+   //console.log(uid)
+    const q = query(colRef, where("uid", "==", uid))
+
+    function getUserData(){
+       setLoading(true)
+       onSnapshot(q, (snapshot) =>{
+        let userdata = []
+            snapshot.docs.forEach((doc) =>{
+            userdata.push({...doc.data(), id: doc.id})
+        }) 
+        setName(userdata[0].username)
+        setLoading(false)
+    })
+   }
     
+    useEffect(() => {
+        getUserData()
+    },[])
 
-    //console.log(userData)
-    //const [currentUserID, setCurrentUserID] = useState("")
-    //console.log(currentUser.uid)
-    const navigate = useNavigate()   
+    if(loading){
+        return <h1>loading...</h1>
+    }
 
-   /* useEffect(() =>{
-        console.log(currentUser.uid)
-    })*/
-
+     
     return (
        <>
         <Card>
             <Card.Body>
                 <h2 className="text-center mb-4">Dashboard</h2>
-                <h4 className="text-center mb-4">Welcome</h4>
-                <h4 className="text-center mb-4">{name}</h4>
+                <h4 className="text-center mb-4">Welcome, {name}!</h4>
                 <h4 className="text-center mb-4">{email}</h4>
                 <h4 className="text-center mb-4">{uid}</h4>
                 <Link to="/update-profile" className="btn btn-primary w-100 mt-3"> 
