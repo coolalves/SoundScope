@@ -45,10 +45,10 @@ export default function Dashboard() {
        <>
         <Card>
             <Card.Body>
-                <h2 className="text-center mb-4">Dashboard</h2>
-                <h4 className="text-center mb-4">Welcome, {name}!</h4>
-                <h4 className="text-center mb-4">{email}</h4>
-                <h4 className="text-center mb-4">{uid}</h4>
+                <h1 className="text-center mb-4">Dashboard</h1>
+                <h2 className="text-center mb-4">Welcome, {name}!</h2>
+                <p className="text-center mb-4">{email}</p>
+                <p className="text-center mb-4">{uid}</p>
                 <Link to="/update-profile" className="btn btn-primary w-100 mt-3"> 
                     Update Profile
                 </Link>
