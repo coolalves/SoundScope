@@ -4,6 +4,11 @@ import {register, colRef} from '../../config/firebase'
 import { Link, useNavigate } from 'react-router-dom'
 import { addDoc } from 'firebase/firestore'
 
+export function UseStorage(x='')
+{
+    window.sessionStorage.setItem(x)
+}
+
 export function get(user = ""){
   return window.sessionStorage.getItem(user)
 }
@@ -33,13 +38,13 @@ export default function Login() {
     }
     console.log(dados)
 
-    const createUserProfile = async () =>{
+    /*const createUserProfile = async () =>{
         await addDoc(colRef, 
           {
             username: username,
             email: email,
           })
-      }
+      }*/
 
     return (
         <>
@@ -63,7 +68,18 @@ export default function Login() {
             onClick={async e => {
               e.preventDefault()
                    await register(email, password)
-                  .then(async (response) => {alert('Successfully Registered'); UserParam(response.user.uid); createUserProfile(); navigate('/dashboard/')})
+                  .then(async (response) => {alert('Successfully Registered'); 
+                  UserParam(response.user.uid); 
+                  addDoc(colRef,
+                    {
+                        uid:response.user.uid,
+                        username: username,
+                        email: email
+                    });
+                  UseStorage('username', response.user.username);
+                  UseStorage('useremail', response.user.email);  
+                  UseStorage('id', response.user.uid);
+                  navigate('/dashboard/')})
                   .catch((error) => alert(error.message))
           }}
             className="w-100 " type="submit">
@@ -72,7 +88,7 @@ export default function Login() {
             
           </Form>
           <div className="w-100 text-center mt-2">
-            Need an account? <Link to="/signup">Sign Up</Link>
+            Already have an account? <Link to="/login">Log in</Link>
           </div>
         </Card.Body>
       </Card>

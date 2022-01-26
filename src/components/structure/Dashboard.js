@@ -9,7 +9,9 @@ import {userParam} from "../authentication/Signup"
 
 export default function Dashboard() {
     
-   
+   const name = window.sessionStorage.getItem("username")
+   const email = window.sessionStorage.getItem("useremail")
+   const uid = window.sessionStorage.getItem("id")
    // UserData(userInfo)
     
 
@@ -27,7 +29,10 @@ export default function Dashboard() {
         <Card>
             <Card.Body>
                 <h2 className="text-center mb-4">Dashboard</h2>
-                <h2 className="text-center mb-4">Welcome</h2>
+                <h4 className="text-center mb-4">Welcome</h4>
+                <h4 className="text-center mb-4">{name}</h4>
+                <h4 className="text-center mb-4">{email}</h4>
+                <h4 className="text-center mb-4">{uid}</h4>
                 <Link to="/update-profile" className="btn btn-primary w-100 mt-3"> 
                     Update Profile
                 </Link>

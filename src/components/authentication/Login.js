@@ -55,16 +55,6 @@ export default function Login() {
             className="w-100 mt-3 mb-3" type="submit">
               Log In
             </Button>
-            <Button 
-            onClick={async e => {
-              e.preventDefault()
-                   await register(email, password)
-                  .then(async (response) => {alert('Successfully Registered'); UserParam(response.user.uid); navigate('/add-user/')})
-                  .catch((error) => alert(error.message))
-          }}
-            className="w-100 " type="submit">
-              Register
-            </Button>
           </Form>
           <div className="w-100 text-center mt-2">
             Need an account? <Link to="/signup">Sign Up</Link>
