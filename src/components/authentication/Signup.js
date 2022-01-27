@@ -36,32 +36,28 @@ export default function Login() {
     const UserParam = (i) => {
       setDados(i)
     }
-    console.log(dados)
+    //console.log(dados)
 
-    /*const createUserProfile = async () =>{
-        await addDoc(colRef, 
-          {
-            username: username,
-            email: email,
-          })
-      }*/
+       
 
     return (
         <>
       <Card>
-        <Card.Body>
+        <Card.Body >
           <Form>
-          <h2 className="text-center mb-4">Welcome</h2>
+          <h2 className="text-center mb-4">Register</h2>
+          <div className="text-center mb-4">
+          </div>  
           <Form.Group id="username">
-              <Form.Label>username</Form.Label>
+              <Form.Label>Username:</Form.Label>
               <Form.Control type="username"  value={username} onChange={(e) => {setUsername(e.target.value.trim())}} required />
             </Form.Group>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+            <Form.Group className="mt-4" id="email">
+              <Form.Label>Email:</Form.Label>
               <Form.Control type="email"  value={email} onChange={(e) => {setEmail(e.target.value.trim())}} required />
             </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
+            <Form.Group className="mt-4" id="password">
+              <Form.Label>Password:</Form.Label>
               <Form.Control type="password"  value={password} onChange={(e) => {setPassword(e.target.value)}} required />
             </Form.Group>
             <Button 
@@ -82,7 +78,7 @@ export default function Login() {
                   navigate('/dashboard/')})
                   .catch((error) => alert(error.message))
           }}
-            className="w-100 " type="submit">
+            className="w-100 mt-4" type="submit">
               Register
             </Button>
             

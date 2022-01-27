@@ -1,21 +1,19 @@
 
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
-import Login from "../components/authentication/Login"
-import UpdateProfile from "./../components/structure/UpdateProfile"
-import Dashboard from "./../components/structure/Dashboard"
-import AddUser from "../components/authentication/AddUser"
 import Signup from "../components/authentication/Signup"
+import Login from "../components/authentication/Login"
+import Dashboard from "./../components/structure/Dashboard"
+import ProfilePicture from "./../components/structure/ProfilePicture"
 
 export default function ProjectRoutes(){
     return (
         <Router>
             <Routes>
                 <Route index path="/" element={<Login />} />
-                <Route index path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/add-user" element={<AddUser />} />
+                <Route index path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/update-profile" element={<UpdateProfile />} />
+                <Route path="/profile-picture" element={<ProfilePicture />} />
             </Routes>
         </Router>
     )
