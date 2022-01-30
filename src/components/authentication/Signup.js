@@ -3,6 +3,7 @@ import {Form, Button, Card} from 'react-bootstrap';
 import {register, colRef} from '../../config/firebase'
 import { Link, useNavigate } from 'react-router-dom'
 import { addDoc } from 'firebase/firestore'
+import { updateProfile } from 'firebase/auth';
 
 export function UseStorage(x='', y='')
 {
@@ -27,6 +28,7 @@ export function useGetStorage(x='')
   return window.sessionStorage.getItem(x)
 }
 
+
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -36,7 +38,7 @@ export default function Login() {
     const UserParam = (i) => {
       setDados(i)
     }
-    //console.log(dados)
+    
 
        
 
@@ -63,7 +65,7 @@ export default function Login() {
             <Button 
             onClick={async e => {
               e.preventDefault()
-                   await register(email, password)
+                   await register(email, password); updateProfile
                   .then(async (response) => {alert('Successfully Registered'); 
                   UserParam(response.user.uid); 
                   addDoc(colRef,

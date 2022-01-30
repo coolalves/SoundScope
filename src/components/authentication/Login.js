@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Form, Button, Card} from 'react-bootstrap';
 import {login, register} from '../../config/firebase'
 import { Link, useNavigate } from 'react-router-dom'
-
+import { UseStorage } from './Signup';
 
 export function get(user = ""){
   return window.sessionStorage.getItem(user)
@@ -49,7 +49,7 @@ export default function Login() {
             onClick={async e => {
               e.preventDefault()
               await login(email, password)
-                  .then ((response) => {alert('Successfully Logged In'); UserParam(response.user.uid); navigate('/dashboard/');})
+                  .then ((response) => {alert('Successfully Logged In'); UserParam(response.user.uid); UseStorage('useremail', response.user.email);   navigate('/dashboard/');})
                   .catch((error) => alert(error.message))
           }}
             className="w-100 mt-3 mb-3" type="submit">
