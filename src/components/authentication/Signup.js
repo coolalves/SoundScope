@@ -65,7 +65,7 @@ export default function Login() {
             <Button 
             onClick={async e => {
               e.preventDefault()
-                   await register(email, password); updateProfile
+                   await register(email, password)
                   .then(async (response) => {alert('Successfully Registered'); 
                   UserParam(response.user.uid); 
                   addDoc(colRef,

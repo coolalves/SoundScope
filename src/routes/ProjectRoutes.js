@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 import Signup from "../components/authentication/Signup"
 import Login from "../components/authentication/Login"
 import Dashboard from "./../components/structure/Dashboard"
-import ProfilePicture from "./../components/structure/ProfilePicture"
 
 export default function ProjectRoutes(){
     return (
@@ -13,7 +12,6 @@ export default function ProjectRoutes(){
                 <Route path="/signup" element={<Signup />} />
                 <Route index path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/profile-picture" element={<ProfilePicture />} />
             </Routes>
         </Router>
     )

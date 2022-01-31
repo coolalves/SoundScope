@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card, Button} from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { logout, colRef, useAuth } from '../../config/firebase'
+import { logout, colRef, useAuth, upload } from '../../config/firebase'
 import { onSnapshot, query, where, docs } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
 import { userDidSignup } from '../authentication/Signup'
@@ -17,8 +17,10 @@ export default function Dashboard() {
     const navigate = useNavigate()  
     const q = query(colRef, where("uid", "==", uid))
     const [photoURL, setPhotoURL] = useState('https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png')
+    const [photo, setPhoto] = useState(null)
     const [registered, setRegistered] = useState(false)
-    const currentUser = useAuth("")
+    const currentUser = useAuth()
+    
     
     function getUserData(){
        setLoading(true)
@@ -33,6 +35,7 @@ export default function Dashboard() {
             setLoading(false)
         }catch{
             setRegistered(false)
+            console.log(userdata)
             setName(loggedname)
             setLoading(false)
         }
@@ -40,7 +43,15 @@ export default function Dashboard() {
     })
    }
     
-   //console.log(currentUser.displayName)
+   function handleChange(e){
+       if (e.target.files[0]){
+           setPhoto(e.target.files[0])
+       }
+    } 
+
+   function handleClick(){
+       upload(photo, currentUser, setLoading)
+   }
     
     
     useEffect(() => {
@@ -57,7 +68,7 @@ export default function Dashboard() {
     if(loading){
         return <h1>loading...</h1>
     }
-
+ 
     
      
     return (
@@ -65,16 +76,18 @@ export default function Dashboard() {
         <Card>
             <Card.Body>
                 <h1 className="text-center mb-4">Dashboard</h1>
-                <h2 className="text-center mb-4">Welcome, {name + " falta corrigir isto no login"} !</h2>
-                <div className="text-center">
-                <img  style={{borderRadius: 200, width:65}} src={photoURL} alt="Avatar" className='avatar'/>
-                </div>
+                <h2 className="text-center mb-4">Welcome, {name} !</h2>
                 <p className="text-center mb-4">{email}</p>
                 <p className="text-center mb-4">{uid}</p>
 
-            <div className="w-100 text-center mt-3">
-            <Button onClick={async e => {e.preventDefault();navigate('/profile-picture')}}>Update profile picture</Button>
-            <Button onClick={async e => {e.preventDefault(); logout(); alert('Logged Out'); window.sessionStorage.clear(); navigate('/login')}} variant="link">
+                <div className="text-center w-100 text-center mt-3">
+                <img  style={{borderRadius: 200, width:65}} src={photoURL} alt="Avatar" className='avatar'/>
+                <input type="file" className="text-center mt-2 mb-3" onChange={handleChange} />
+                <Button disabled={loading || !photo} onClick={handleClick}> Upload Picture </Button>
+                </div>
+               
+            <div className="w-100 text-center mt-2">
+            <Button onClick={async e => {e.preventDefault(); logout(); alert('Logged Out'); window.sessionStorage.clear(); navigate('/login')}}>
             Log Out
             </Button>
             </div>

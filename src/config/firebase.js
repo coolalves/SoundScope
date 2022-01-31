@@ -1,6 +1,6 @@
 import {initializeApp} from 'firebase/app'
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail} from 'firebase/auth'
-import {getStorage, ref, uploadBytes} from "firebase/storage"
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, updateProfile} from 'firebase/auth'
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage"
 import{useState, useEffect} from "react";
 import { getFirestore, collection, getDocs } from 'firebase/firestore'
 
@@ -44,9 +44,9 @@ export function useAuth()
     return currentUser
 }
 
-export async function register(Email, Pass)
+export async function register(email, password)
 {
-    return createUserWithEmailAndPassword(auth, Email, Pass)
+    return createUserWithEmailAndPassword(auth, email, password)
 }
 
 export async function login(email, password) {
@@ -69,6 +69,8 @@ export async function updatePassword(password){
   return updatePassword(auth, password)
 }
 
+
+/*
 export const uploadFiles = async (file, setLoading) => {
   if (!file) return;
 
@@ -79,6 +81,24 @@ export const uploadFiles = async (file, setLoading) => {
 
   alert('File Uploaded!')
 }
+*/
 
- 
+export async function upload(file, currentUser, setLoading){
+  
+  const fileRef = ref(storage, currentUser.uid, + '.png')
+  
+  setLoading(true)
+  
+  const snapshot = await uploadBytes(fileRef, file) 
+  
+  const photoURL = await getDownloadURL(fileRef)
+
+  updateProfile(currentUser, {photoURL})
+  
+  setLoading(false)
+  
+  alert("uploaded file")
+
+}
+
 export default app
