@@ -4,8 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { logout, colRef, useAuth, upload } from '../../config/firebase'
 import { onSnapshot, query, where, docs } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
-import { userDidSignup } from '../authentication/Signup'
-
+import { updateProfile } from 'firebase/auth';
 
 export default function Dashboard() {
     
@@ -20,9 +19,9 @@ export default function Dashboard() {
     const [photo, setPhoto] = useState(null)
     const [registered, setRegistered] = useState(false)
     const currentUser = useAuth()
+    console.log(currentUser)
     
-    
-    function getUserData(){
+    async function getUserData(){
        setLoading(true)
        onSnapshot(q, (snapshot) =>{
         let userdata = []
@@ -31,6 +30,7 @@ export default function Dashboard() {
         })
         try{
             setName(userdata[0].username)
+            updateProfile(currentUser, {displayName: name})
             setRegistered(true)
             setLoading(false)
         }catch{

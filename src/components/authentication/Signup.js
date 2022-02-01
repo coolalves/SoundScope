@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import {Form, Button, Card} from 'react-bootstrap';
-import {register, colRef} from '../../config/firebase'
+import {register, colRef, useAuth} from '../../config/firebase'
 import { Link, useNavigate } from 'react-router-dom'
-import { addDoc } from 'firebase/firestore'
-import { updateProfile } from 'firebase/auth';
-
+import { addDoc, onSnapshot, query, where, docs } from 'firebase/firestore'
 export function UseStorage(x='', y='')
 {
     window.sessionStorage.setItem(x, y)
@@ -29,12 +27,19 @@ export function useGetStorage(x='')
 }
 
 
+
 export default function Login() {
+    const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
     const navigate = useNavigate()
     const [dados, setDados] = useState('')
+    const currentUser = useAuth()
+
+    
+    
+
     const UserParam = (i) => {
       setDados(i)
     }
@@ -52,7 +57,7 @@ export default function Login() {
           </div>  
           <Form.Group id="username">
               <Form.Label>Username:</Form.Label>
-              <Form.Control type="username"  value={username} onChange={(e) => {setUsername(e.target.value.trim())}} required />
+              <Form.Control type="username"  value={username} onChange={(e) => {setUsername(e.target.value.trim()); }} required />
             </Form.Group>
             <Form.Group className="mt-4" id="email">
               <Form.Label>Email:</Form.Label>
@@ -77,9 +82,10 @@ export default function Login() {
                   UseStorage('username', response.user.displayName);
                   UseStorage('useremail', response.user.email);  
                   UseStorage('id', response.user.uid);
+                  
                   navigate('/dashboard/')})
                   .catch((error) => alert(error.message))
-          }}
+                }}
             className="w-100 mt-4" type="submit">
               Register
             </Button>

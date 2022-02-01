@@ -47,6 +47,7 @@ export function useAuth()
 export async function register(email, password)
 {
     return createUserWithEmailAndPassword(auth, email, password)
+    
 }
 
 export async function login(email, password) {
