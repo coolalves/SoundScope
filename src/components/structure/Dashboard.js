@@ -38,8 +38,7 @@ export default function Dashboard() {
             console.log(userdata)
             setName(loggedname)
             setLoading(false)
-        }
-        
+        }        
     })
    }
     
@@ -73,6 +72,7 @@ export default function Dashboard() {
      
     return (
        <>
+      
         <Card>
             <Card.Body>
                 <h1 className="text-center mb-4">Dashboard</h1>

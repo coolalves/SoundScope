@@ -1,5 +1,4 @@
 import React from "react"
-//import Signup from "../components/authentication/Signup"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from "react-bootstrap";
 import ProjectRoutes from "../routes/ProjectRoutes";
