@@ -42,11 +42,13 @@ export default function Dashboard() {
   const [username, setUsername] = useRecoilState(userState);
   const name = useRecoilValue(getUser);
   const email = useRecoilValue(getEmail);
-  console.log(email)
+  console.log(useRecoilValue(getEmail))
   const[userlist, setUserlist] = useRecoilState(userListState)
   setUserlist(users)
   const allusers = useRecoilValue(getUsers)
   console.log(allusers)
+
+
 
   async function getUserData() {
     setLoading(true);

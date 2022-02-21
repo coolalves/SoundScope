@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
 export const emailState = atom({
-  key: "emailState",
-  default: "",
-});
+    key: 'textState', // unique ID (with respect to other atoms/selectors)
+    default: '', // default value (aka initial value)
+  });
