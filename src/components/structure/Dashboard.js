@@ -11,24 +11,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout, colRef, useAuth, upload } from "../../config/firebase";
 import { onSnapshot, query, where, docs } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import {users} from "../../config/firebase";
+import { users } from "../../config/firebase";
 
 //recoil
 import { useRecoilValue } from "recoil";
-import {useRecoilState } from "recoil"
-import {userState} from "../../recoil/atoms/username"
-import {userListState} from "../../recoil/atoms/userlist"
-import { getUser } from "../../recoil/selectors/getUsername"
-import { getEmail } from "../../recoil/selectors/getEmail"
-import { getUsers } from "../../recoil/selectors/getAllUsers"
+import { useRecoilState } from "recoil";
+import { userState } from "../../recoil/atoms/username";
+import { userListState } from "../../recoil/atoms/userlist";
+import { getUser } from "../../recoil/selectors/getUsername";
+import { getEmail } from "../../recoil/selectors/getEmail";
+import { getUsers } from "../../recoil/selectors/getAllUsers";
+import { getUid } from "../../recoil/selectors/getUid";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
-  
-  const uid = window.sessionStorage.getItem("id");
+
+  //const uid = window.sessionStorage.getItem("id");
   const loggedname = window.sessionStorage.getItem("username");
   const navigate = useNavigate();
-  const q = query(colRef, where("uid", "==", uid));
+
   const [photoURL, setPhotoURL] = useState(
     "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
   );
@@ -37,43 +38,37 @@ export default function Dashboard() {
   const currentUser = useAuth();
   const [song, setSong] = useState("");
   const [txtSong, setTxtSong] = useState("");
-  console.log(currentUser);
-  
+  //console.log(currentUser);
+
   const [username, setUsername] = useRecoilState(userState);
   const name = useRecoilValue(getUser);
   const email = useRecoilValue(getEmail);
-  console.log(useRecoilValue(getEmail))
-  const[userlist, setUserlist] = useRecoilState(userListState)
-  setUserlist(users)
-  const allusers = useRecoilValue(getUsers)
+  const uid = useRecoilValue(getUid);
+  console.log(uid)
+  
+  const emailcerto = email;
+  console.log(useRecoilValue(getEmail));
+  const [userlist, setUserlist] = useRecoilState(userListState);
+  setUserlist(users);
+  const allusers = useRecoilValue(getUsers);
   console.log(allusers)
 
-
-
-  async function getUserData() {
-    setLoading(true);
-
-    onSnapshot(q, (snapshot) => {
-      let userdata = [];
-      snapshot.docs.forEach((doc) => {
-        userdata.push({ ...doc.data(), id: doc.id });
-      });
-      try {
-        if(userdata == []){
-
+    for(let i = 0; i<allusers.length; i++){
+        console.log(allusers[i].uid)
+        if(allusers[i].uid == uid){
+            setUsername(allusers[i].username)
+        }else{
+            console.log("corno")
         }
-        if(name == undefined){
-            setUsername(userdata[0].username)
-        }
-        setLoading(false);
-      } catch {
-        setRegistered(false);
-        console.log(userdata);
-        //setName(loggedname);
-        setLoading(false);
-      }
-    });
-  }
+    }
+
+  const [nomecerto, setNomecerto] = useState("");
+
+ 
+    
+    
+  
+  //console.log(email)
 
   function handleChange(e) {
     if (e.target.files[0]) {
@@ -91,12 +86,6 @@ export default function Dashboard() {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    getUserData();
-  }, []);
-
- 
-  
   var songList;
   useEffect(() => {
     fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${txtSong}`, {
@@ -134,7 +123,6 @@ export default function Dashboard() {
           <h1 className="text-center mb-4">Dashboard</h1>
           <h2 className="text-center mb-4">Welcome, {username} !</h2>
           <p className="text-center mb-4">{email}</p>
-          <p className="text-center mb-4">{uid}</p>
 
           <Form.Group>
             <Form.Label>Search</Form.Label>
