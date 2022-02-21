@@ -3,6 +3,8 @@ import { Form, Button, Card } from "react-bootstrap";
 import { login } from "../../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { UseStorage } from "./Signup";
+import { useRecoilState } from "recoil";
+import { emailState } from "../../recoil/atoms/email";
 
 export function get(user = "") {
   return window.sessionStorage.getItem(user);
@@ -20,7 +22,7 @@ export function useGetStorage(x = "") {
 }
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useRecoilState(emailState);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [dados, setDados] = useState("");
