@@ -1,15 +1,30 @@
+//react
 import React from "react";
+
+//bootstrap
 import { Card, Button, Form } from "react-bootstrap";
+
+//router
 import { Link, useNavigate } from "react-router-dom";
+
+//firebase
 import { logout, colRef, useAuth, upload } from "../../config/firebase";
 import { onSnapshot, query, where, docs } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { updateProfile } from "firebase/auth";
+import {users} from "../../config/firebase";
+
+//recoil
+import { useRecoilValue } from "recoil";
+import {useRecoilState } from "recoil"
+import {userState} from "../../recoil/atoms/username"
+import {userListState} from "../../recoil/atoms/userlist"
+import { getUser } from "../../recoil/selectors/getUsername"
+import { getEmail } from "../../recoil/selectors/getEmail"
+import { getUsers } from "../../recoil/selectors/getAllUsers"
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
-  const email = window.sessionStorage.getItem("useremail");
+  
   const uid = window.sessionStorage.getItem("id");
   const loggedname = window.sessionStorage.getItem("username");
   const navigate = useNavigate();
@@ -23,23 +38,36 @@ export default function Dashboard() {
   const [song, setSong] = useState("");
   const [txtSong, setTxtSong] = useState("");
   console.log(currentUser);
+  
+  const [username, setUsername] = useRecoilState(userState);
+  const name = useRecoilValue(getUser);
+  const email = useRecoilValue(getEmail);
+  console.log(email)
+  const[userlist, setUserlist] = useRecoilState(userListState)
+  setUserlist(users)
+  const allusers = useRecoilValue(getUsers)
+  console.log(allusers)
 
   async function getUserData() {
     setLoading(true);
+
     onSnapshot(q, (snapshot) => {
       let userdata = [];
       snapshot.docs.forEach((doc) => {
         userdata.push({ ...doc.data(), id: doc.id });
       });
       try {
-        setName(userdata[0].username);
-        updateProfile(currentUser, { displayName: name });
-        setRegistered(true);
+        if(userdata == []){
+
+        }
+        if(name == undefined){
+            setUsername(userdata[0].username)
+        }
         setLoading(false);
       } catch {
         setRegistered(false);
         console.log(userdata);
-        setName(loggedname);
+        //setName(loggedname);
         setLoading(false);
       }
     });
@@ -65,6 +93,8 @@ export default function Dashboard() {
     getUserData();
   }, []);
 
+ 
+  
   var songList;
   useEffect(() => {
     fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${txtSong}`, {
@@ -100,7 +130,7 @@ export default function Dashboard() {
       <Card>
         <Card.Body>
           <h1 className="text-center mb-4">Dashboard</h1>
-          <h2 className="text-center mb-4">Welcome, {name} !</h2>
+          <h2 className="text-center mb-4">Welcome, {username} !</h2>
           <p className="text-center mb-4">{email}</p>
           <p className="text-center mb-4">{uid}</p>
 

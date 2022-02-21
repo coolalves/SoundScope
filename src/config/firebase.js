@@ -12,6 +12,9 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useState, useEffect } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
+import {useRecoilState } from "recoil"
+import {userListState} from "../recoil/atoms/userlist"
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -28,17 +31,23 @@ export const storage = getStorage(app);
 export const db = getFirestore(app);
 export const colRef = collection(db, "users");
 
+
+
+
+export const users = [];
+
 getDocs(colRef)
   .then((snapshot) => {
-    let users = [];
+    
     snapshot.docs.forEach((doc) => {
       users.push({ ...doc.data(), id: doc.id });
     });
-    console.log(users);
+    //console.log(users);
   })
   .catch((err) => {
     console.log(err.message);
   });
+  console.log(users)
 
 export function useAuth() {
   const [currentUser, setCurrentUser] = useState(null);
