@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { addDoc } from "firebase/firestore";
 import { colRefSongs } from "../../config/firebase";
 
+import { useRecoilState } from "recoil";
+import { currentsongState } from "../../recoil/atoms/currentsong";
+
 import "../../styles/app.css";
 
 const Search = (props) => {
@@ -22,7 +25,13 @@ const Search = (props) => {
   const [selectedSong, setSelectedSong] = useState("");
   const [selectedSongInfo, setSelectedSongInfo] = useState([]);
   const [song, setSong] = useState("");
+  const [play, setPlay] = useState(false);
+  const [songLink, setSongLink] = useState("");
+  const [currentSong, setCurrentSong] = useRecoilState(currentsongState);
 
+  let audio = new Audio(songLink);
+
+  // togglePlay = () => {};
 
   const txtSongHandler = (e) => {
     setTxtSong(e.target.value);
@@ -35,14 +44,13 @@ const Search = (props) => {
   const getSong = (e) => {
     console.log(e);
     setSelectedSongInfo(e);
+    setCurrentSong(e);
     setSelectedSong(
       <div className="boxsongs">
         <div className="songs">
           <img src={e.album.cover_small}></img>
-
           <div className="songInfo">
             <h2>{e.title}</h2>
-
             <h4>{e.artist.name}</h4>
           </div>
         </div>
@@ -71,6 +79,7 @@ const Search = (props) => {
                   <div className="songInfo">
                     <h2>{elmt.title}</h2>
                     <h4>{elmt.artist.name}</h4>
+                    <button>play</button>
                   </div>
                 </div>
                 <button
@@ -122,6 +131,7 @@ const Search = (props) => {
 
       <div>
         {selectedSong}
+       
         <button
           onClick={() => {
             insertSong();

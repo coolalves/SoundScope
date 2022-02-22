@@ -18,17 +18,18 @@ import { users } from "../../config/firebase";
 //import { songs } from "../../config/firebase";
 
 //recoil
-import { useRecoilValue } from "recoil";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
+
 import { userState } from "../../recoil/atoms/username";
 import { userListState } from "../../recoil/atoms/userlist";
-import { getUser } from "../../recoil/selectors/getUsername";
+//import { getUser } from "../../recoil/selectors/getUsername";
 import { getEmail } from "../../recoil/selectors/getEmail";
 import { getUsers } from "../../recoil/selectors/getAllUsers";
 import { getUid } from "../../recoil/selectors/getUid";
 
 //components
 import Search from "./Search";
+import PreviewPlayer from "./PreviewPlayer";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
@@ -137,6 +138,7 @@ export default function Dashboard() {
           </div>
         </Card.Body>
       </Card>
+      <PreviewPlayer/>
     </>
   );
 }
