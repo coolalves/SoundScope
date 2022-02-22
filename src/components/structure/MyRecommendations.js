@@ -15,7 +15,7 @@ const MyRecommendations = (props) => {
   return mysongs.map((e) => {
     return (
         
-      <div className="boxsongs">
+      <div className="boxsongs" key={e.title}>
         <div className="songs">
           <img src={e.image}></img>
           <div className="songInfo">
