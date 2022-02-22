@@ -40,7 +40,7 @@ export default function Dashboard() {
   );
   const [photo, setPhoto] = useState(null);
   //const [registered, setRegistered] = useState(false);
-  
+
   const currentUser = useAuth();
 
   //console.log(currentUser);

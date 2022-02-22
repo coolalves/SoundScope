@@ -9,25 +9,24 @@ import { useRecoilValue } from "recoil";
 import "../../styles/app.css";
 
 const Search = (props) => {
-
   //current date
-  let date = new Date()
-  let day = date.getDate()
-  let month = date.getMonth()
-  let year = date.getFullYear()
-  let hour = date.getHours()
-  let minutes = date.getMinutes()
-  let currentDate = day + '/' + (month + 1) + '/' + year + ' - ' + hour + 'h' +  minutes + 'm'
+  let date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth();
+  let year = date.getFullYear();
+  let hour = date.getHours();
+  let minutes = date.getMinutes();
+  let currentDate =
+    day + "/" + (month + 1) + "/" + year + " - " + hour + "h" + minutes + "m";
 
   //console.log(currentDate)
-
 
   const [txtSong, setTxtSong] = useState("");
   const [selectedSong, setSelectedSong] = useState("");
   const [selectedSongInfo, setSelectedSongInfo] = useState([]);
   const [song, setSong] = useState("");
   //const username = useRecoilValue(getUser);
-  
+
   const txtSongHandler = (e) => {
     setTxtSong(e.target.value);
 
@@ -103,7 +102,7 @@ const Search = (props) => {
       name: selectedSongInfo.artist.name,
       recomendedby: props.username,
       title: selectedSongInfo.title,
-      date: currentDate
+      date: currentDate,
     });
     //console.log(selectedSongInfo.id)
   }

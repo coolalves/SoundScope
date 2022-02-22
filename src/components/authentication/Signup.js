@@ -7,7 +7,6 @@ import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms/username";
 import { emailState } from "../../recoil/atoms/email";
 
-
 export function UseStorage(x = "", y = "") {
   window.sessionStorage.setItem(x, y);
 }
@@ -35,7 +34,6 @@ export default function Login() {
   const navigate = useNavigate();
   const [dados, setDados] = useState("");
   const currentUser = useAuth();
-  
 
   const UserParam = (i) => {
     setDados(i);

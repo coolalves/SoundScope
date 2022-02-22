@@ -12,8 +12,8 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useState, useEffect } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
-import {useRecoilState } from "recoil"
-import {userListState} from "../recoil/atoms/userlist"
+import { useRecoilState } from "recoil";
+import { userListState } from "../recoil/atoms/userlist";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -32,14 +32,11 @@ export const db = getFirestore(app);
 export const colRef = collection(db, "users");
 export const colRefSongs = collection(db, "recomendadas");
 
-
-
 export const users = [];
 export const songs = [];
 
 getDocs(colRefSongs)
   .then((snapshot) => {
-    
     snapshot.docs.forEach((doc) => {
       songs.push({ ...doc.data(), id: doc.id });
     });
@@ -48,7 +45,7 @@ getDocs(colRefSongs)
   .catch((err) => {
     console.log(err.message);
   });
-  console.log(songs)
+console.log(songs);
 
 getDocs(colRef)
   .then((snapshot) => {
@@ -60,7 +57,7 @@ getDocs(colRef)
   .catch((err) => {
     console.log(err.message);
   });
-  console.log(users)
+console.log(users);
 
 export function useAuth() {
   const [currentUser, setCurrentUser] = useState(null);
