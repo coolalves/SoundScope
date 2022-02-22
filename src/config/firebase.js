@@ -30,11 +30,25 @@ export const auth = getAuth(app);
 export const storage = getStorage(app);
 export const db = getFirestore(app);
 export const colRef = collection(db, "users");
-
+export const colRefSongs = collection(db, "recomendadas");
 
 
 
 export const users = [];
+export const songs = [];
+
+getDocs(colRefSongs)
+  .then((snapshot) => {
+    
+    snapshot.docs.forEach((doc) => {
+      songs.push({ ...doc.data(), id: doc.id });
+    });
+    //console.log(users);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+  console.log(songs)
 
 getDocs(colRef)
   .then((snapshot) => {
