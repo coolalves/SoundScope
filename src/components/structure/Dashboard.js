@@ -30,6 +30,7 @@ import { getUid } from "../../recoil/selectors/getUid";
 //components
 import Search from "./Search";
 import PreviewPlayer from "./PreviewPlayer";
+import MyRecommendations from "./MyRecommendations";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
@@ -138,7 +139,8 @@ export default function Dashboard() {
           </div>
         </Card.Body>
       </Card>
-      <PreviewPlayer/>
+      <PreviewPlayer />
+      <MyRecommendations username={username}/>
     </>
   );
 }

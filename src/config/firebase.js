@@ -12,8 +12,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useState, useEffect } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
-import { useRecoilState } from "recoil";
-import { userListState } from "../recoil/atoms/userlist";
+
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -39,6 +38,8 @@ getDocs(colRefSongs)
   .then((snapshot) => {
     snapshot.docs.forEach((doc) => {
       songs.push({ ...doc.data(), id: doc.id });
+      //const [recommended, setRecommended] = useRecoilState(recommendedState)
+      //setRecommended(songs)
     });
     //console.log(users);
   })
@@ -46,6 +47,9 @@ getDocs(colRefSongs)
     console.log(err.message);
   });
 console.log(songs);
+
+
+
 
 getDocs(colRef)
   .then((snapshot) => {
