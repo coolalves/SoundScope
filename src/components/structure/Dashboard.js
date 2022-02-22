@@ -34,6 +34,7 @@ import MyRecommendations from "./MyRecommendations";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
+  const [recommended, setRecommended] = useState(false);
 
   const navigate = useNavigate();
 
@@ -97,6 +98,10 @@ export default function Dashboard() {
     );
   }
 
+  function toggleRecommended() {
+    setRecommended(!recommended);
+  }
+
   return (
     <>
       <Card>
@@ -140,7 +145,16 @@ export default function Dashboard() {
         </Card.Body>
       </Card>
       <PreviewPlayer />
-      <MyRecommendations username={username}/>
+
+      
+      <button
+        onClick={() => {
+          toggleRecommended();
+        }}
+      >
+        minhas recomendações
+      </button>
+      {recommended ? <MyRecommendations username={username} /> : null}
     </>
   );
 }
