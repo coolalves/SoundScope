@@ -2,7 +2,7 @@
 import React from "react";
 
 //css
-import "../../styles/app.css";
+import "../../../styles/app.css";
 
 //bootstrap
 import { Card, Button, Form } from "react-bootstrap";
@@ -11,21 +11,21 @@ import { Card, Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 //firebase
-import { logout, colRefSongs, useAuth, upload } from "../../config/firebase";
+import { logout, colRefSongs, useAuth, upload } from "../../../config/firebase";
 //import { onSnapshot, query, where, docs } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { users } from "../../config/firebase";
+import { users } from "../../../config/firebase";
 //import { songs } from "../../config/firebase";
 
 //recoil
 import { useRecoilValue, useRecoilState } from "recoil";
 
-import { userState } from "../../recoil/atoms/username";
-import { userListState } from "../../recoil/atoms/userlist";
+import { userState } from "../../../recoil/atoms/username";
+import { userListState } from "../../../recoil/atoms/userlist";
 //import { getUser } from "../../recoil/selectors/getUsername";
-import { getEmail } from "../../recoil/selectors/getEmail";
-import { getUsers } from "../../recoil/selectors/getAllUsers";
-import { getUid } from "../../recoil/selectors/getUid";
+import { getEmail } from "../../../recoil/selectors/getEmail";
+import { getUsers } from "../../../recoil/selectors/getAllUsers";
+import { getUid } from "../../../recoil/selectors/getUid";
 
 //components
 import Search from "./Search";

@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Signup from "../components/authentication/Signup";
 import Login from "../components/authentication/Login";
-import Dashboard from "./../components/structure/Dashboard";
+import Dashboard from "../components/structure/dashboard/Dashboard";
 
 export default function ProjectRoutes() {
   return (

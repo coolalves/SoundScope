@@ -1,12 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { addDoc } from "firebase/firestore";
-import { colRefSongs } from "../../config/firebase";
+import { colRefSongs } from "../../../config/firebase";
 
 import { useRecoilState } from "recoil";
-import { currentsongState } from "../../recoil/atoms/currentsong";
+import { currentsongState } from "../../../recoil/atoms/currentsong";
 
-import "../../styles/app.css";
+import "../../../styles/app.css";
 
 const Search = (props) => {
   //current date

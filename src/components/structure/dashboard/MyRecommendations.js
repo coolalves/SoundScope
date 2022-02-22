@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import "../../styles/app.css";
+import "../../../styles/app.css";
 
-import { songs } from "../../config/firebase";
+import { songs } from "../../../config/firebase";
 
 const MyRecommendations = (props) => {
   let mysongs = [];

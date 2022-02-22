@@ -1,8 +1,8 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { getCurrentSong } from "../../recoil/selectors/getCurrentSong";
+import { getCurrentSong } from "../../../recoil/selectors/getCurrentSong";
 //css
-import "../../styles/app.css";
+import "../../../styles/app.css";
 
 const PreviewPlayer = () => {
   const currentSong = useRecoilValue(getCurrentSong);
