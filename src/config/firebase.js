@@ -52,7 +52,6 @@ getDocs(colRefSongs)
 
 getDocs(colRef)
   .then((snapshot) => {
-    
     snapshot.docs.forEach((doc) => {
       users.push({ ...doc.data(), id: doc.id });
     });

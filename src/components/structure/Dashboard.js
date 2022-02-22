@@ -15,7 +15,7 @@ import { logout, colRefSongs, useAuth, upload } from "../../config/firebase";
 //import { onSnapshot, query, where, docs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { users } from "../../config/firebase";
-import { songs } from "../../config/firebase";
+//import { songs } from "../../config/firebase";
 
 //recoil
 import { useRecoilValue } from "recoil";
@@ -28,36 +28,35 @@ import { getUsers } from "../../recoil/selectors/getAllUsers";
 import { getUid } from "../../recoil/selectors/getUid";
 
 //components
-import Search from "./Search"
+import Search from "./Search";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
 
-  
-  
   const navigate = useNavigate();
 
   const [photoURL, setPhotoURL] = useState(
     "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
   );
   const [photo, setPhoto] = useState(null);
-  const [registered, setRegistered] = useState(false);
+  //const [registered, setRegistered] = useState(false);
+  
   const currentUser = useAuth();
 
   //console.log(currentUser);
 
   const [username, setUsername] = useRecoilState(userState);
-  const name = useRecoilValue(getUser);
+  //const name = useRecoilValue(getUser);
   const email = useRecoilValue(getEmail);
   const uid = useRecoilValue(getUid);
-  console.log(uid);
+  //console.log(uid);
 
-  const emailcerto = email;
-  console.log(useRecoilValue(getEmail));
+  //const emailcerto = email;
+  //console.log(useRecoilValue(getEmail));
   const [userlist, setUserlist] = useRecoilState(userListState);
   setUserlist(users);
   const allusers = useRecoilValue(getUsers);
-  console.log(allusers);
+  //console.log(allusers);
 
   for (let i = 0; i < allusers.length; i++) {
     console.log(allusers[i].uid);
@@ -68,7 +67,7 @@ export default function Dashboard() {
     }
   }
 
-  const [nomecerto, setNomecerto] = useState("");
+  //const [nomecerto, setNomecerto] = useState("");
 
   //console.log(email)
 
@@ -104,7 +103,7 @@ export default function Dashboard() {
           <h2 className="text-center mb-4">Welcome, {username} !</h2>
           <p className="text-center mb-4">{email}</p>
 
-          <Search username={username}/>   
+          <Search username={username} />
           <div className="text-center w-100 text-center mt-3">
             <img
               style={{ borderRadius: 200, width: 65 }}

@@ -19,7 +19,7 @@ const Search = (props) => {
   let minutes = date.getMinutes()
   let currentDate = day + '/' + (month + 1) + '/' + year + ' - ' + hour + 'h' +  minutes + 'm'
 
-  console.log(currentDate)
+  //console.log(currentDate)
 
 
   const [txtSong, setTxtSong] = useState("");

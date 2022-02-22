@@ -30,7 +30,7 @@ export default function Login() {
   const UserParam = (i) => {
     setUid(i);
   };
-  console.log(uid);
+  //console.log(uid);
   return (
     <>
       <Card>
