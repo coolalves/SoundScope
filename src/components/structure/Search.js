@@ -106,7 +106,7 @@ const Search = (props) => {
       id: selectedSongInfo.id,
       image: selectedSongInfo.album.cover,
       name: selectedSongInfo.artist.name,
-      recomendedby: props.username,
+      recommendedby: props.username,
       title: selectedSongInfo.title,
       date: currentDate,
     });

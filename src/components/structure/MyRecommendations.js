@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "../../styles/app.css";
 
 import { songs } from "../../config/firebase";
 
 const MyRecommendations = (props) => {
+
+    useEffect(() => {
+
+    })
   let mysongs = [];
   for (let i = 0; i < songs.length; i++) {
-    if (songs[i].recomendedby == props.username) {
+    if (songs[i].recommendedby == props.username) {
       mysongs.push(songs[i]);
       console.log(mysongs);
     }
