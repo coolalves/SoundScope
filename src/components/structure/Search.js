@@ -3,9 +3,6 @@ import { useState, useEffect } from "react";
 import { addDoc } from "firebase/firestore";
 import { colRefSongs } from "../../config/firebase";
 
-import { getUser } from "../../recoil/selectors/getUsername";
-import { useRecoilValue } from "recoil";
-
 import "../../styles/app.css";
 
 const Search = (props) => {
@@ -25,7 +22,7 @@ const Search = (props) => {
   const [selectedSong, setSelectedSong] = useState("");
   const [selectedSongInfo, setSelectedSongInfo] = useState([]);
   const [song, setSong] = useState("");
-  //const username = useRecoilValue(getUser);
+
 
   const txtSongHandler = (e) => {
     setTxtSong(e.target.value);
