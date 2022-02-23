@@ -23,6 +23,7 @@ import { getUsers } from "../../../recoil/selectors/getAllUsers";
 import { getUid } from "../../../recoil/selectors/getUid";
 
 //components
+import Navbar from "./Navbar"
 import Search from "./Search";
 import PreviewPlayer from "./PreviewPlayer";
 import MyRecommendations from "./MyRecommendations";
@@ -85,6 +86,7 @@ export default function Dashboard() {
 
   return (
     <>
+    <Navbar/>
       <h1>Dashboard</h1>
       <h2>Welcome, {username} !</h2>
       <p>{email}</p>

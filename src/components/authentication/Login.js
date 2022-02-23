@@ -6,20 +6,7 @@ import { useRecoilState } from "recoil";
 import { emailState } from "../../recoil/atoms/email";
 import { uidState } from "../../recoil/atoms/uid";
 
-export function get(user = "") {
-  return window.sessionStorage.getItem(user);
-}
-
-export function useVerify(x = "") {
-  window.sessionStorage.getItem(x);
-
-  if (window.sessionStorage.getItem(x) != null) return true;
-  else return false;
-}
-
-export function useGetStorage(x = "") {
-  return window.sessionStorage.getItem(x);
-}
+ 
 
 export default function Login() {
   const [email, setEmail] = useRecoilState(emailState);
@@ -29,7 +16,7 @@ export default function Login() {
   const UserParam = (i) => {
     setUid(i);
   };
-  //console.log(uid);
+
   return (
     <>
       <h2>Welcome</h2>
@@ -60,8 +47,7 @@ export default function Login() {
           await login(email, password)
             .then((response) => {
               alert("Successfully Logged In");
-              UserParam(response.user.uid);
-              UseStorage("useremail", response.user.email);
+              UserParam(response.user.uid); 
               navigate("/dashboard/");
             })
             .catch((error) => alert(error.message));

@@ -13,7 +13,7 @@ export function UseStorage(x = "", y = "") {
 export function get(user = "") {
   return window.sessionStorage.getItem(user);
 }
-
+console.log(window.sessionStorage)
 export function useVerify(x = "") {
   window.sessionStorage.getItem(x);
 
