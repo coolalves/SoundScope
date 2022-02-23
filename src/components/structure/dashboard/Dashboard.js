@@ -4,7 +4,6 @@ import React from "react";
 //css
 import "../../../styles/app.css";
 
-
 //router
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +22,7 @@ import { getUsers } from "../../../recoil/selectors/getAllUsers";
 import { getUid } from "../../../recoil/selectors/getUid";
 
 //components
-import Navbar from "./Navbar"
+import Navbar from "./Navbar";
 import Search from "./Search";
 import PreviewPlayer from "./PreviewPlayer";
 import MyRecommendations from "./MyRecommendations";
@@ -86,49 +85,53 @@ export default function Dashboard() {
 
   return (
     <>
-    <Navbar/>
-      <h1>Dashboard</h1>
-      <h2>Welcome, {username} !</h2>
-      <p>{email}</p>
+      <Navbar />
 
-      <Search username={username} />
-      <div>
-        <img
-          style={{ borderRadius: 200, width: 65 }}
-          src={photoURL}
-          alt="Avatar"
-        />
-        <input type="file" onChange={handleChange} />
-        <button disabled={loading || !photo} onClick={handleClick}>
-          {" "}
-          Upload Picture{" "}
-        </button>
-      </div>
+      <div className="mainApp">
+        <h1>Dashboard</h1>
+        <h2>Welcome, {username} !</h2>
+        <p>{email}</p>
 
-      <div>
+        <Search username={username} />
+        <div>
+          <img
+            style={{ borderRadius: 200, width: 65 }}
+            src={photoURL}
+            alt="Avatar"
+          />
+          <input type="file" onChange={handleChange} />
+          <button disabled={loading || !photo} onClick={handleClick}>
+            {" "}
+            Upload Picture{" "}
+          </button>
+        </div>
+
+        <div>
+          <button
+            onClick={async (e) => {
+              e.preventDefault();
+              logout();
+              alert("Logged Out");
+              window.sessionStorage.clear();
+              navigate("/login");
+            }}
+          >
+            Log Out
+          </button>
+        </div>
+
+        <PreviewPlayer />
+
         <button
-          onClick={async (e) => {
-            e.preventDefault();
-            logout();
-            alert("Logged Out");
-            window.sessionStorage.clear();
-            navigate("/login");
+          onClick={() => {
+            toggleRecommended();
           }}
         >
-          Log Out
+          minhas recomendações
         </button>
+        {recommended ? <MyRecommendations username={username} /> : null}
       </div>
-
-      <PreviewPlayer />
-
-      <button
-        onClick={() => {
-          toggleRecommended();
-        }}
-      >
-        minhas recomendações
-      </button>
-      {recommended ? <MyRecommendations username={username} /> : null}
+      
     </>
   );
 }

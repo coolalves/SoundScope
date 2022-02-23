@@ -10,7 +10,7 @@ body{
   font-family: IBM Plex Mono, monospace;
 }
 
-navbar{
+header{
   display: flex;
   justify-content:space-between;
   align-items: center;
@@ -19,11 +19,11 @@ navbar{
   height: 8vh;
 }
 
-navbar img {
+header img {
   width: 12vw;
 }
 
-navbar a{
+header a{
   margin-right: 5vw;
 }
 
