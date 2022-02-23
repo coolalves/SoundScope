@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Form, Button, Card } from "react-bootstrap";
 import { login } from "../../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { UseStorage } from "./Signup";
@@ -33,55 +32,48 @@ export default function Login() {
   //console.log(uid);
   return (
     <>
-      <Card>
-        <Card.Body>
-          <Form>
-            <h2 className="text-center mb-4">Welcome</h2>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value.trim());
-                }}
-                required
-              />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                required
-              />
-            </Form.Group>
-            <Button
-              onClick={async (e) => {
-                e.preventDefault();
-                await login(email, password)
-                  .then((response) => {
-                    alert("Successfully Logged In");
-                    UserParam(response.user.uid);
-                    UseStorage("useremail", response.user.email);
-                    navigate("/dashboard/");
-                  })
-                  .catch((error) => alert(error.message));
-              }}
-              className="w-100 mt-3 mb-3"
-              type="submit"
-            >
-              Log In
-            </Button>
-          </Form>
-          <div className="w-100 text-center mt-2">
-            Need an account? <Link to="/signup">Sign Up</Link>
-          </div>
-        </Card.Body>
-      </Card>
+      <h2>Welcome</h2>
+
+      <label>Email</label>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => {
+          setEmail(e.target.value.trim());
+        }}
+        required
+      />
+
+      <label>Password</label>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => {
+          setPassword(e.target.value);
+        }}
+        required
+      />
+
+      <button
+        onClick={async (e) => {
+          e.preventDefault();
+          await login(email, password)
+            .then((response) => {
+              alert("Successfully Logged In");
+              UserParam(response.user.uid);
+              UseStorage("useremail", response.user.email);
+              navigate("/dashboard/");
+            })
+            .catch((error) => alert(error.message));
+        }}
+        type="submit"
+      >
+        Log In
+      </button>
+
+      <div>
+        Need an account? <Link to="/signup">Sign Up</Link>
+      </div>
     </>
   );
 }

@@ -1,108 +1,112 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inconsolata:wght@200;300;400;500;600&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=Inconsolata:wght@200;300;400;500;600&display=swap');
 
-
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  font-family: IBM Plex Mono, monospace;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+navbar{
   display: flex;
-  flex-direction: column;
+  justify-content:space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  height: 10vh;
 }
 
-.App-link {
-  color: #61dafb;
+navbar img {
+  width: 12vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+navbar a{
+  margin-right: 5vw;
+}
+
+.mainApp{
+  background-color: #353535;
+  height: 100vh
+}
+
+
+
+.box-recomendar{
+
+  display: flex;
+  background-color: #353535;
+  height:70vh;
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+ 
+
+}
+
+.box-showSongs{
+  width: 50%;
+  height: 100%;
+  overflow: scroll;
+  background: #e8e8e8;
+
+  max-height: 100vh
+}
+
+.box-form-recommendation{
+  width: 50%;
+  border-width:  1px;
+  border-style: solid;
+  border-color: #ffe600;
+  border-right: #e8e8e8
 }
 
 .songs{
-  display: flex;
+  display:flex;
   align-items: center;
-  margin-bottom: 10px;
-  font-family: mont;
 }
 
-.songs img{
-  border-radius: 50%;
-}
-
-.boxsongs{
-  margin-bottom: 20px;
-}
 .songInfo{
-  margin-left: 15px;
+  margin-left: 1vw;
 }
 
-.songInfo h4{
- margin-top: 0px;
- color: gray;
+.songInfo h1{
+  font-size: 1em
 }
 
 .songInfo h2{
-  margin-bottom: 0px;
- }
-
-
- .selectTheSong{
-   display:flex;
-   align-items: flex-start;
-   align-content: center;
-   width: 700px;
-   height: 700px;
-   background-color:#efe64b;
-   margin-left: auto;
-   margin-right: auto;
-   border-radius: 25px, 25px, 25px, 25px
- }
-
- .showSongs{
-   overflow: scroll;
-   height: 500px
- }
-
-.scrollmenu {
-  background-color: #333;
-  overflow: auto;
-  white-space: nowrap;
-  max-width: 100px;
+  font-size: 1em;
+  font-weight: normal;
 }
 
-div.scrollmenu a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
+.boxsongs{
+ margin-left: 3vw;
+ margin-bottom: 5vh;
 }
 
-.formSong{
-  background-color: rgb(226, 225, 225);
-  height: 100%;
-  width: 50%;
+
+.boxsongs button{
+  background: #60606000;
+
+color: #2e2e2e;
+
+border-style: solid;
+
+border-color: #2e2e2e;
+
+padding: 1vh;
+
+font-family: IBM Plex Mono, monospace;
+
+
+text-shadow:none;
 }
+
+
+.box-button {
+  margin-top: 1vh;
+}
+
+

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Form, Button, Card } from "react-bootstrap";
 import { register, colRef, useAuth } from "../../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { addDoc, onSnapshot, query, where, docs } from "firebase/firestore";
@@ -41,75 +40,67 @@ export default function Login() {
 
   return (
     <>
-      <Card>
-        <Card.Body>
-          <Form>
-            <h2 className="text-center mb-4">Register</h2>
-            <div className="text-center mb-4"></div>
-            <Form.Group id="username">
-              <Form.Label>Username:</Form.Label>
-              <Form.Control
-                type="username"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value.trim());
-                }}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mt-4" id="email">
-              <Form.Label>Email:</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value.trim());
-                }}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mt-4" id="password">
-              <Form.Label>Password:</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                required
-              />
-            </Form.Group>
-            <Button
-              onClick={async (e) => {
-                e.preventDefault();
-                await register(email, password)
-                  .then(async (response) => {
-                    alert("Successfully Registered");
-                    UserParam(response.user.uid);
-                    addDoc(colRef, {
-                      uid: response.user.uid,
-                      username: username,
-                      email: email,
-                    });
-                    UseStorage("username", response.user.displayName);
-                    UseStorage("useremail", response.user.email);
-                    UseStorage("id", response.user.uid);
+      <h2>Register</h2>
+      <div></div>
 
-                    navigate("/dashboard/");
-                  })
-                  .catch((error) => alert(error.message));
-              }}
-              className="w-100 mt-4"
-              type="submit"
-            >
-              Register
-            </Button>
-          </Form>
-          <div className="w-100 text-center mt-2">
-            Already have an account? <Link to="/login">Log in</Link>
-          </div>
-        </Card.Body>
-      </Card>
+      <label>Username:</label>
+      <input
+        type="username"
+        value={username}
+        onChange={(e) => {
+          setUsername(e.target.value.trim());
+        }}
+        required
+      />
+
+      <label>Email:</label>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => {
+          setEmail(e.target.value.trim());
+        }}
+        required
+      />
+
+      <label>Password:</label>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => {
+          setPassword(e.target.value);
+        }}
+        required
+      />
+
+      <button
+        onClick={async (e) => {
+          e.preventDefault();
+          await register(email, password)
+            .then(async (response) => {
+              alert("Successfully Registered");
+              UserParam(response.user.uid);
+              addDoc(colRef, {
+                uid: response.user.uid,
+                username: username,
+                email: email,
+              });
+              UseStorage("username", response.user.displayName);
+              UseStorage("useremail", response.user.email);
+              UseStorage("id", response.user.uid);
+
+              navigate("/dashboard/");
+            })
+            .catch((error) => alert(error.message));
+        }}
+        type="submit"
+      >
+        Register
+      </button>
+
+      <div>
+        Already have an account? <Link to="/login">Log in</Link>
+      </div>
     </>
   );
 }
