@@ -11,8 +11,7 @@ import SelectedSong from "./SelectedSong";
 import "../../../styles/app.css";
 
 const Search = (props) => {
-
-  console.log(props.username)
+  console.log(props.username);
 
   //current date
   let date = new Date();
@@ -115,7 +114,7 @@ const Search = (props) => {
         title={e.title}
         artist={e.artist.name}
         img={e.album.cover_xl}
-        id = {e.id}
+        id={e.id}
         preview={e.preview}
         getSong={getSong}
       />
@@ -148,24 +147,25 @@ const Search = (props) => {
             </button>
           ) : null}
         </div>
+        <div className="displayInteraction">
+          <input
+            className="displaySelectSong"
+            onChange={(e) => {
+              txtSongHandler(e);
+            }}
+            placeholder="Search"
+          ></input>
 
-        <input
-          className="displaySelectSong"
-          onChange={(e) => {
-            txtSongHandler(e);
-          }}
-          placeholder="Search"
-        ></input>
+          <input className="commentary"></input>
 
-        <input className="commentary"></input>
-
-        <button
-          onClick={() => {
-            insertSong();
-          }}
-        >
-          Recomendar
-        </button>
+          <button
+            onClick={() => {
+              insertSong();
+            }}
+          >
+            Recomendar
+          </button>
+        </div>
       </div>
 
       <div className="displayRight">{showSongs}</div>

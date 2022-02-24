@@ -103,10 +103,24 @@ export default function Dashboard() {
       <Navbar />
 
       <div className="mainApp">
-        <h1>Dashboard</h1>
-        <h2>Welcome, {username} !</h2>
+       
+      
 
-        <div className="menu">
+     
+
+        <PreviewPlayer />
+        {!recommended && toRecommend ? (
+          <Search username={username} />
+        ) : (
+
+        <div className="allRecommendations">  
+          <MyRecommendations username={username} />
+        </div>
+
+        )}
+      </div>
+
+      <div className="menu">
           <a
             className={
               toRecommend && !recommended
@@ -135,18 +149,6 @@ export default function Dashboard() {
             MINHAS RECOMENDAÇÕES
           </a>
         </div>
-
-        <PreviewPlayer />
-        {!recommended && toRecommend ? (
-          <Search username={username} />
-        ) : (
-
-        <div className="allRecommendations">  
-          <MyRecommendations username={username} />
-        </div>
-
-        )}
-      </div>
     </div>
   );
 }
