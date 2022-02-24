@@ -49,8 +49,6 @@ getDocs(colRefSongs)
 console.log(songs);
 
 
-
-
 getDocs(colRef)
   .then((snapshot) => {
     snapshot.docs.forEach((doc) => {
