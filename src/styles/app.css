@@ -6,25 +6,57 @@
   padding: 0
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #353535;
+
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #353535;
+  border: 1px solid #ffe600;
+}
+
 body{
   font-family: IBM Plex Mono, monospace;
+  background-color: #353535;
 }
 
 header{
   display: flex;
-  justify-content:space-between;
-  align-items: center;
+  flex-direction: column;
   padding-left: 5vw;
   padding-right: 5vw;
   height: 8vh;
+  border-bottom: 1px solid #ffe600;
+}
+
+header div {
+  display: flex;
+  flex-direction: column
 }
 
 header img {
   width: 12vw;
+  color: #ffe600;
+}
+
+header svg{
+  fill: #94d31b;
 }
 
 header a{
   margin-right: 5vw;
+  color: #ffe600;
 }
 
 .mainApp{
@@ -42,11 +74,13 @@ header a{
   width: 50vw;
   margin-left: auto;
   margin-right: auto;
- 
+
 
 }
 
 .box-showSongs{
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
   overflow: scroll;
@@ -66,24 +100,35 @@ header a{
 .songs{
   display:flex;
   align-items: center;
+  margin-bottom: 1vh;
+}
+
+.songs img{
+  width:56px;
+  height: 56px
 }
 
 .songInfo{
   margin-left: 1vw;
 }
 
-.songInfo h1{
-  font-size: 1em
-}
-
 .songInfo h2{
   font-size: 1em;
+  color: #ffe600;
+}
+
+.songInfo h4{
+  font-size: 1em;
   font-weight: normal;
+  color: #ffe600;
 }
 
 .boxsongs{
- margin-left: 3vw;
- margin-bottom: 5vh;
+ padding-left: 3vw;
+
+ margin-top: 5vh;
+ padding-bottom: 3vw;
+ border-bottom: 1px solid #ffe600;
 }
 
 
@@ -109,4 +154,282 @@ text-shadow:none;
   margin-top: 1vh;
 }
 
+.box-form-recommendation input{
+  font-family: IBM Plex Mono, monospace;
+  background: transparent;
+  border-style: solid;
+  border-color: #ffe600;
+  color: white;
+  height: 5vh;
+  width: 15vw
+}
 
+.box-form-recommendation input::placeholder{
+  font-family: IBM Plex Mono, monospace;
+  color: white;
+ 
+}
+
+.box-putInformation{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.boxsongs-selecionada{
+  display: flex;
+}
+
+.boxsongs-selecionada button{
+  background: none;
+  border: none;
+}
+
+.boxsongs-selecionada img{
+  width: 200px;
+  height: 200px;
+}
+
+.boxsongs-selecionada h1{
+  font-size: 2.5em;
+  font-weight: 600;
+  color: white;
+}
+
+.boxsongs-selecionada h2{
+  font-size: 1em;
+  font-weight: normal;
+  color: white;
+}
+
+.displaySearch{
+  display: flex;
+  height:70vh;
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #ffe600 ;
+}
+
+.displayRight{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  overflow-y: scroll;
+  background: none;
+
+  max-height: 100vh
+}
+
+.displayLeft{
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  background:  none;
+
+  max-height: 100vh
+}
+
+.displayLeft button{
+  background:#ffe600;
+  border: none;
+  margin-top: 2vh;
+  padding:1vh;
+  font-family: IBM Plex Mono, monospace;
+}
+
+
+.displayLeft label{
+  color: white;
+}
+
+.displaySelectedSong{
+  height: 30vh;
+  width: 15vw;
+  margin-bottom: 5vh;
+  background-color: #353535;
+  -webkit-box-shadow: inset -1px 5px 12px 3px rgba(0,0,0,1);
+  -moz-box-shadow: inset -1px 5px 12px 3px rgba(0,0,0,1);
+  box-shadow: inset -1px 5px 12px 3px rgba(0,0,0,1);
+}
+
+
+.displaySelectSong{
+  font-family: IBM Plex Mono, monospace;
+  background: transparent;
+  border-style: solid;
+  border-color: #ffe600;
+  color: white;
+  height: 5vh;
+  width: 15vw;
+  margin-bottom: 2vh
+}
+
+.displaySelectedSong button {
+  background-color: transparent;
+  border: 1px solid #ffe600;
+  color: #ffe600;
+}
+
+.displaySelectedSong button:hover {
+  transform: scale(1.07);
+  transition: all 0.5 ease
+}
+
+.commentary{
+  font-family: IBM Plex Mono, monospace;
+  background: transparent;
+  border-style: solid;
+  border-color: #ffe600;
+  color: white;
+  height: 15vh;
+  width: 15vw
+}
+
+.displaySelectedSong{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.displaySelectedSong p{
+  color: rgb(139, 139, 139)
+}
+
+.displaySelectedSong img{
+  width: 50%;
+ 
+}
+
+.displaySelectedSong h1{
+  color: white;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.displaySelectedSong h2{
+  color: white;
+  font-weight: normal;
+  font-size: 0.8em;
+}
+
+.buttonPlayPause{
+  margin-left: 0.5vw;
+  cursor: pointer
+}
+
+.buttonPlayPause:hover{
+  background-color: #2e2e2e;
+  color: white;
+}
+
+.buttonAdd:hover {
+  transform: scale(1.07)
+}
+
+.menu {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+
+.active{
+  color: #ffe600;
+  font-size: 2em;
+  font-weight:500;
+  letter-spacing: .3rem;
+}
+
+.disabled{
+  color: #7c7c7c;
+  font-size: 2em;
+  font-weight:500;
+  letter-spacing: .3rem;
+}
+
+.allRecommendations{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.displayRecommendation {
+  width: 45%;
+  border: 1px solid #ffe600;
+  margin-bottom: 2vh;
+  padding: 1.5vh;
+}
+
+.displaySongRecommended img{
+  width: 50px;
+  height: 50px
+}
+
+.displaySongRecommended {
+  display: flex;
+}
+
+.songRecommendInfo h2{
+  color:  #ffe600;
+  font-weight: 500;
+  font-size: 1em
+}
+
+.songRecommendInfo h4{
+  color:  #ffffff;
+  font-weight: 500;
+  font-size: 1em
+}
+
+.recommendationText p{
+  font-size: 1.25em;
+  font-weight: normal;
+  color: white;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  letter-spacing: .1rem;
+}
+
+.recommendationDate p{
+  font-size: 1em;
+  font-weight: normal;
+  color: #7c7c7c;
+ 
+}
+
+.songRecommendInfo {
+  margin-left: 1vw;
+}
+
+.userInfo{
+  display: flex;
+  align-items: center;
+}
+
+.userInfo h2 {
+  font-weight: 300;
+  font-size: 1em;
+  color: white;
+}
+
+.userInfo img {
+  width: 50px;
+  border-radius: 50%
+  
+}
+
+
+.app{
+  display: flex;
+}

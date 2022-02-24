@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 //firebase
 import { logout, useAuth, upload } from "../../../config/firebase";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { users } from "../../../config/firebase";
 
 //recoil
@@ -27,9 +27,14 @@ import Search from "./Search";
 import PreviewPlayer from "./PreviewPlayer";
 import MyRecommendations from "./MyRecommendations";
 
+//react-icons
+import { CgDisc } from "react-icons/cg";
+import { FaHeart } from "react-icons/fa";
+
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [recommended, setRecommended] = useState(false);
+  const [toRecommend, setToRecommend] = useState(true);
 
   const navigate = useNavigate();
 
@@ -45,6 +50,10 @@ export default function Dashboard() {
   const [userlist, setUserlist] = useRecoilState(userListState);
   setUserlist(users);
   const allusers = useRecoilValue(getUsers);
+
+  //Styles
+  const activeStyle = useRef("active");
+  const disabledStyle = useRef("disabled");
 
   for (let i = 0; i < allusers.length; i++) {
     console.log(allusers[i].uid);
@@ -79,59 +88,65 @@ export default function Dashboard() {
     );
   }
 
-  function toggleRecommended() {
-    setRecommended(!recommended);
-  }
+  const toggleRecommended = () => {
+    setRecommended(true);
+    setToRecommend(false);
+  };
+
+  const toggleToRecommend = (e) => {
+    setRecommended(false);
+    setToRecommend(true);
+  };
 
   return (
-    <>
+    <div className="app">
       <Navbar />
 
       <div className="mainApp">
         <h1>Dashboard</h1>
         <h2>Welcome, {username} !</h2>
-        <p>{email}</p>
 
-        <Search username={username} />
-        <div>
-          <img
-            style={{ borderRadius: 200, width: 65 }}
-            src={photoURL}
-            alt="Avatar"
-          />
-          <input type="file" onChange={handleChange} />
-          <button disabled={loading || !photo} onClick={handleClick}>
-            {" "}
-            Upload Picture{" "}
-          </button>
-        </div>
-
-        <div>
-          <button
-            onClick={async (e) => {
-              e.preventDefault();
-              logout();
-              alert("Logged Out");
-              window.sessionStorage.clear();
-              navigate("/login");
+        <div className="menu">
+          <a
+            className={
+              toRecommend && !recommended
+                ? activeStyle.current
+                : disabledStyle.current
+            }
+            onClick={() => {
+              toggleToRecommend();
             }}
           >
-            Log Out
-          </button>
+            <CgDisc />
+            RECOMENDAR
+          </a>
+
+          <a
+            className={
+              !toRecommend && recommended
+                ? activeStyle.current
+                : disabledStyle.current
+            }
+            onClick={() => {
+              toggleRecommended();
+            }}
+          >
+            <FaHeart />
+            MINHAS RECOMENDAÇÕES
+          </a>
         </div>
 
         <PreviewPlayer />
+        {!recommended && toRecommend ? (
+          <Search username={username} />
+        ) : (
 
-        <button
-          onClick={() => {
-            toggleRecommended();
-          }}
-        >
-          minhas recomendações
-        </button>
-        {recommended ? <MyRecommendations username={username} /> : null}
+        <div className="allRecommendations">  
+          <MyRecommendations username={username} />
+        </div>
+
+        )}
       </div>
-      
-    </>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "../../../styles/app.css";
+import RecommendedSong from "./RecommendedSong";
 
 import { songs } from "../../../config/firebase";
 
@@ -12,18 +13,11 @@ const MyRecommendations = (props) => {
     }
   }
 
-  return mysongs.map((e) => {
+  return mysongs.map((e,key) => {
     return (
-      <div className="boxsongs" key={e.title}>
-        <div className="songs">
-          <img src={e.image}></img>
-          <div className="songInfo">
-            <h2>{e.title}</h2>
-            <h4>{e.name}</h4>
-            <p>{e.date}</p>
-          </div>
-        </div>
-      </div>
+
+      <RecommendedSong key={key} image={e.image} title={e.title} name = {e.name} date = {e.date} />
+
     );
   });
 };

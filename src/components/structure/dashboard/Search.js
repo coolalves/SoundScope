@@ -1,14 +1,19 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { addDoc } from "firebase/firestore";
 import { colRefSongs } from "../../../config/firebase";
 
 import { useRecoilState } from "recoil";
 import { currentsongState } from "../../../recoil/atoms/currentsong";
+import DisplaySong from "./DisplaySong";
+import SelectedSong from "./SelectedSong";
 
 import "../../../styles/app.css";
 
 const Search = (props) => {
+
+  console.log(props.username)
+
   //current date
   let date = new Date();
   let day = date.getDate();
@@ -22,11 +27,11 @@ const Search = (props) => {
   //console.log(currentDate)
 
   const [txtSong, setTxtSong] = useState("");
-  const [selectedSong, setSelectedSong] = useState("");
   const [selectedSongInfo, setSelectedSongInfo] = useState([]);
   const [song, setSong] = useState("");
   const [play, setPlay] = useState(false);
   const [songLink, setSongLink] = useState("");
+  const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useRecoilState(currentsongState);
 
   let audio = new Audio(songLink);
@@ -34,33 +39,23 @@ const Search = (props) => {
   // togglePlay = () => {};
 
   const txtSongHandler = (e) => {
-    setTxtSong(e.target.value);
-
-    if (e.target.value === "") {
-      setSong("");
+    if (e.target.value == "") {
+      setSongs(initialSongs.current);
     }
+
+    setTxtSong(e.target.value);
   };
 
-  const getSong = (e) => {
-    console.log(e);
-    setSelectedSongInfo(e);
-    setCurrentSong(e);
-    setSelectedSong(
-      <div className="boxsongs">
-        <div className="songs">
-          <img src={e.album.cover_small}></img>
-          <div className="songInfo">
-            <h2>{e.title}</h2>
-            <h4>{e.artist.name}</h4>
-          </div>
-        </div>
-      </div>
-    );
-
-    setSong("");
+  const getSong = (elmt) => {
+    setSelectedSongInfo(elmt);
   };
 
-  var songList;
+  const removeSelectedSong = () => {
+    setSelectedSongInfo({});
+  };
+
+  const initialSongs = useRef([]);
+
   useEffect(() => {
     fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${txtSong}`, {
       method: "GET",
@@ -71,29 +66,10 @@ const Search = (props) => {
     })
       .then((response) => {
         response.json().then((info) => {
-          songList = info.data.map((elmt) => {
-            return (
-              <div className="boxsongs">
-                <div className="songs">
-                  <img src={elmt.album.cover_small}></img>
-                  <div className="songInfo">
-                    <h2>{elmt.title}</h2>
-                    <h4>{elmt.artist.name}</h4>
-                    <button>play</button>
-                  </div>
-                </div>
-                <button
-                  onClick={() => {
-                    getSong(elmt);
-                  }}
-                >
-                  Adicionar
-                </button>
-              </div>
-            );
-          });
-          console.log(info.data[0]);
-          setSong(songList);
+          if (info.data != undefined) {
+            setSongs(info.data);
+            console.log(songs);
+          }
         });
       })
       .catch((err) => {
@@ -101,46 +77,99 @@ const Search = (props) => {
       });
   }, [txtSong]);
 
+  useEffect(() => {
+    fetch("https://deezerdevs-deezer.p.rapidapi.com/playlist/6553547464", {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+        "x-rapidapi-key": "4bb5270137msh7798e1355b243c4p19e658jsna5b2299ba91e",
+      },
+    })
+      .then((response) => {
+        response.json().then((info) => {
+          setSongs(info.tracks.data);
+          initialSongs.current = info.tracks.data;
+          console.log(initialSongs.current);
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   function insertSong() {
     addDoc(colRefSongs, {
       id: selectedSongInfo.id,
-      image: selectedSongInfo.album.cover,
-      name: selectedSongInfo.artist.name,
+      image: selectedSongInfo.img,
+      name: selectedSongInfo.artist,
       recommendedby: props.username,
       title: selectedSongInfo.title,
       date: currentDate,
     });
-    //console.log(selectedSongInfo.id)
   }
 
+  let showSongs = songs.map((e, key) => {
+    return (
+      <DisplaySong
+        key={key}
+        title={e.title}
+        artist={e.artist.name}
+        img={e.album.cover_xl}
+        id = {e.id}
+        preview={e.preview}
+        getSong={getSong}
+      />
+    );
+  });
+
+  let emptyObject = Object.keys(selectedSongInfo).length === 0;
+
   return (
-    <>
-      <label>Search</label>
+    <div className="displaySearch">
+      <div className="displayLeft">
+        <div className="displaySelectedSong">
+          {!emptyObject ? (
+            <SelectedSong
+              title={selectedSongInfo.title}
+              artist={selectedSongInfo.artist}
+              img={selectedSongInfo.img}
+            />
+          ) : (
+            <p>Adicione uma música</p>
+          )}
+          {!emptyObject ? (
+            <button
+              onClick={() => {
+                removeSelectedSong();
+              }}
+            >
+              {" "}
+              Remover{" "}
+            </button>
+          ) : null}
+        </div>
 
-      <input
-        onChange={(e) => {
-          txtSongHandler(e);
-        }}
-        placeholder="Search"
-      ></input>
+        <input
+          className="displaySelectSong"
+          onChange={(e) => {
+            txtSongHandler(e);
+          }}
+          placeholder="Search"
+        ></input>
 
-      <div>
-        {txtSong}
-        {song}
-      </div>
+        <input className="commentary"></input>
 
-      <div>
-        {selectedSong}
-       
         <button
           onClick={() => {
             insertSong();
           }}
         >
-          recomendar
+          Recomendar
         </button>
       </div>
-    </>
+
+      <div className="displayRight">{showSongs}</div>
+    </div>
   );
 };
 

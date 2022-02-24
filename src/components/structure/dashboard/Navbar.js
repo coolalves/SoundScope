@@ -1,15 +1,41 @@
-import logoSongScope from '../../../styles/logoSongScope.svg'
+import logoSongScope from "../../../styles/logoSongScope.svg";
+import { logout, useAuth, upload } from "../../../config/firebase";
+import { useNavigate } from "react-router-dom";
 
+export default function Navbar() {
+  const navigate = useNavigate();
 
-export default function Navbar (){
+  return (
+    <header>
+      <img src={logoSongScope}></img>
+      <div>
+        <a
+          onClick={() => {
+            navigate("/dashboard");
+          }}
+        >
+          Descobrir
+        </a>
+        <a
+          onClick={() => {
+            navigate("/feed");
+          }}
+        >
+          Recomendados
+        </a>
 
-    return(
-        <header>
-            <img src={logoSongScope}></img>
-            <div>
-                <a>Descobrir</a>
-                <a>Recomendados</a>
-            </div>
-        </header>
-    )
+        <a
+          onClick={async (e) => {
+            e.preventDefault();
+            logout();
+            alert("Logged Out");
+            window.sessionStorage.clear();
+            navigate("/login");
+          }}
+        >
+          Log Out
+        </a>
+      </div>
+    </header>
+  );
 }
