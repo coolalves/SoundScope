@@ -32,7 +32,7 @@ export default function RecommendedSong(props) {
         </div>
       </div>
       <div className="recommendationText">
-        <p>Lorem ipsum dolor sit amet, consectetur adip </p>
+        <p>{props.txtRecommendation} </p>
       </div>
       <div className="recommendationDate">
 

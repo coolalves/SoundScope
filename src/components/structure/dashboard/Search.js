@@ -33,6 +33,7 @@ const Search = (props) => {
   const [songLink, setSongLink] = useState("");
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useRecoilState(currentsongState);
+  const txtRecommendation = useRef("")
 
   let audio = new Audio(songLink);
 
@@ -106,7 +107,15 @@ const Search = (props) => {
       title: selectedSongInfo.title,
       date: currentDate,
       preview: selectedSongInfo.preview,
+      txtRecommendation: txtRecommendation.current
     });
+
+    alert("Sugestão adicionada com sucesso!");
+  }
+
+  const setTxtRecommendation = (e) => {
+        txtRecommendation.current = e.target.value
+        console.log(txtRecommendation.current)
   }
 
   let showSongs = songs.map((e, key) => {
@@ -158,7 +167,9 @@ const Search = (props) => {
             placeholder="Search"
           ></input>
 
-          <input className="commentary"></input>
+          <textarea className="commentary" onChange={(e) => {setTxtRecommendation(e)}}>
+
+          </textarea>
 
           <button
             onClick={() => {

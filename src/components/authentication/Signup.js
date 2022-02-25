@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { register, colRef, useAuth } from "../../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { addDoc, onSnapshot, query, where, docs } from "firebase/firestore";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms/username";
 import { emailState } from "../../recoil/atoms/email";
+import { userListState } from "../../recoil/atoms/userlist";
 import logo from "../../styles/logo.svg";
 
 export function UseStorage(x = "", y = "") {
@@ -27,6 +28,7 @@ export function useGetStorage(x = "") {
 }
 
 export default function Login() {
+  const [allUsers, setAllUsers] = useRecoilState(userListState);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useRecoilState(emailState);
   const [password, setPassword] = useState("");
@@ -48,7 +50,6 @@ export default function Login() {
 
       <div className="displayInput">
         <h2>REGISTER</h2>
-       
 
         <label>Username:</label>
         <input
@@ -82,23 +83,37 @@ export default function Login() {
 
         <button
           onClick={async (e) => {
-            e.preventDefault();
-            await register(email, password)
-              .then(async (response) => {
-                alert("Successfully Registered");
-                UserParam(response.user.uid);
-                addDoc(colRef, {
-                  uid: response.user.uid,
-                  username: username,
-                  email: email,
-                });
-                UseStorage("username", response.user.displayName);
-                UseStorage("useremail", response.user.email);
-                UseStorage("id", response.user.uid);
+            let verifyUsers = [];
 
-                navigate("/dashboard/");
-              })
-              .catch((error) => alert(error.message));
+            allUsers.forEach((e) => {
+              if (username == e.username) {
+                verifyUsers.push(username);
+              }
+            });
+
+            console.log(verifyUsers);
+
+            if (verifyUsers.length == 0) {
+              e.preventDefault();
+              await register(email, password)
+                .then(async (response) => {
+                  alert("Successfully Registered");
+                  UserParam(response.user.uid);
+                  addDoc(colRef, {
+                    uid: response.user.uid,
+                    username: username,
+                    email: email,
+                  });
+                  UseStorage("username", response.user.displayName);
+                  UseStorage("useremail", response.user.email);
+                  UseStorage("id", response.user.uid);
+
+                  navigate("/dashboard/");
+                })
+                .catch((error) => alert(error.message));
+            } else {
+              alert("O username escolhido já esá sendo utilizado!");
+            }
           }}
           type="submit"
         >

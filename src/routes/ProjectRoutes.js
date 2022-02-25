@@ -12,8 +12,10 @@ export default function ProjectRoutes() {
         <Route index path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route index path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/feed" element={<Feed />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/feed" element={<Feed />} />
+        </Route>
       </Routes>
     </Router>
   );

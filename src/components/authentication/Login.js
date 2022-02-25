@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { login } from "../../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { UseStorage } from "./Signup";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { emailState } from "../../recoil/atoms/email";
 import { uidState } from "../../recoil/atoms/uid";
+import { isLogged } from "../../recoil/atoms/islogged";
 import logo from "../../styles/logo.svg";
 
 export default function Login() {
   const [email, setEmail] = useRecoilState(emailState);
+  const [useIsLogged, setIsLogged] = useRecoilState(isLogged);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [uid, setUid] = useRecoilState(uidState);
@@ -51,6 +53,8 @@ export default function Login() {
               .then((response) => {
                 alert("Successfully Logged In");
                 UserParam(response.user.uid);
+      
+                setIsLogged({loggedIn: true})
                 navigate("/dashboard/");
               })
               .catch((error) => alert(error.message));

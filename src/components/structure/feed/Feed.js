@@ -23,6 +23,8 @@ export default function Feed() {
           title={e.title}
           name={e.name}
           date={e.date}
+          preview={e.preview}
+          txtRecommendation={e.txtRecommendation}
         />
       </div>
     );
