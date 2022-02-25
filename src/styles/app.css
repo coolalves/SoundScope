@@ -1,14 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=Inconsolata:wght@200;300;400;500;600&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=Inconsolata:wght@200;300;400;500;600&display=swap');
-
-*{
+* {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: blue orange;
+  scrollbar-color: #ffe600 #353535;
 }
 
 /* Works on Chrome, Edge, and Safari */
@@ -18,7 +17,6 @@
 
 *::-webkit-scrollbar-track {
   background: #353535;
-
 }
 
 *::-webkit-scrollbar-thumb {
@@ -26,59 +24,81 @@
   border: 1px solid #ffe600;
 }
 
-body{
+body {
   font-family: IBM Plex Mono, monospace;
   background-color: #353535;
 }
 
-header{
+header {
+  height:100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding-left: 5vw;
-  padding-right: 5vw;
+  padding-right: 2vw;
   border-right: 1px solid #ffe600;
- 
+  background-color: #2e2e2e;
+  opacity: 1;
+  background-color: #353535;
+  opacity: 1;
+  background-image: linear-gradient(
+      #414141 1.7000000000000002px,
+      transparent 1.7000000000000002px
+    ),
+    linear-gradient(
+      to right,
+      #414141 1.7000000000000002px,
+      #353535 1.7000000000000002px
+    );
+  background-size: 34px 34px;
 }
 
 header div {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 header img {
-  width: 12vw;
-  color: #ffe600;
+  width: 4vw;
 }
 
-header svg{
+header svg {
   fill: #94d31b;
 }
 
-header a{
+header a {
+  font-size: 1.25em;
   margin-right: 5vw;
+  margin-bottom: 0.5vh;
+  letter-spacing: 0.3rem;
+  cursor: pointer;
+  color: #7c7c7c;
+}
+
+header a:hover {
   color: #ffe600;
 }
 
-.mainApp{
-  background-color: #353535;
- 
+header a:nth-child(3) {
+  border: 1px solid #ffe600;
+  color: #ffe600;
+  text-align: center;
 }
 
+.mainApp {
+  background-color: #353535;
+}
 
-
-.box-recomendar{
-
+.box-recomendar {
   display: flex;
   background-color: #353535;
-  height:70vh;
+  height: 70vh;
   width: 50vw;
   margin-left: auto;
   margin-right: auto;
-
-
 }
 
-.box-showSongs{
+.box-showSongs {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -86,146 +106,137 @@ header a{
   overflow: scroll;
   background: #e8e8e8;
 
-  max-height: 100vh
+  max-height: 100vh;
 }
 
-.box-form-recommendation{
+.box-form-recommendation {
   width: 50%;
-  border-width:  1px;
+  border-width: 1px;
   border-style: solid;
   border-color: #ffe600;
-  border-right: #e8e8e8
+  border-right: #e8e8e8;
 }
 
-.songs{
-  display:flex;
+.songs {
+  display: flex;
   align-items: center;
   margin-bottom: 1vh;
 }
 
-.songs img{
-  width:56px;
-  height: 56px
+.songs img {
+  width: 56px;
+  height: 56px;
 }
 
-.songInfo{
+.songInfo {
   margin-left: 1vw;
 }
 
-.songInfo h2{
+.songInfo h2 {
   font-size: 1em;
   color: #ffe600;
 }
 
-.songInfo h4{
+.songInfo h4 {
   font-size: 1em;
   font-weight: normal;
   color: #ffe600;
 }
 
-.boxsongs{
- padding-left: 3vw;
+.boxsongs {
+  padding-left: 3vw;
 
- margin-top: 5vh;
- padding-bottom: 3vw;
- border-bottom: 1px solid #ffe600;
+  margin-top: 5vh;
+  padding-bottom: 3vw;
+  border-bottom: 1px solid #7c7c7c;
 }
 
-
-.boxsongs button{
+.boxsongs button {
   background: #60606000;
+  border: 1px solid #ffe600;
 
-color: #7c7c7c;
+  padding: 1vh;
 
-border-style: solid;
-
-border-color: #7c7c7c;
-
-padding: 1vh;
-
-font-family: IBM Plex Mono, monospace;
-
-
-text-shadow:none;
+  font-family: IBM Plex Mono, monospace;
+  color: #ffe600;
+  text-shadow: none;
 }
-
 
 .box-button {
   margin-top: 1vh;
 }
 
-.box-form-recommendation input{
+.box-form-recommendation input {
   font-family: IBM Plex Mono, monospace;
   background: transparent;
   border-style: solid;
   border-color: #ffe600;
   color: white;
   height: 5vh;
-  width: 15vw
+  width: 15vw;
 }
 
-.box-form-recommendation input::placeholder{
+.box-form-recommendation input::placeholder {
   font-family: IBM Plex Mono, monospace;
   color: white;
- 
 }
 
-.box-putInformation{
+.box-putInformation {
   height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
-.boxsongs-selecionada{
+.boxsongs-selecionada {
   display: flex;
 }
 
-.boxsongs-selecionada button{
+.boxsongs-selecionada button {
   background: none;
   border: none;
 }
 
-.boxsongs-selecionada img{
+.boxsongs-selecionada img {
   width: 200px;
   height: 200px;
 }
 
-.boxsongs-selecionada h1{
+.boxsongs-selecionada h1 {
   font-size: 2.5em;
   font-weight: 600;
   color: white;
 }
 
-.boxsongs-selecionada h2{
+.boxsongs-selecionada h2 {
   font-size: 1em;
   font-weight: normal;
   color: white;
 }
 
-.displaySearch{
+.displaySearch {
   display: flex;
-  height:100vh;
+  height: 100vh;
   width: 50vw;
   margin-left: auto;
   margin-right: auto;
   overflow: scroll;
 }
 
-.displayRight{
+.displayRight {
   display: flex;
   flex-direction: column;
   width: 50%;
   height: 100%;
   overflow-y: scroll;
   background: none;
-
-  max-height: 100vh
+  border-right: 1px solid #7c7c7c;
+  max-height: 100vh;
 }
 
-.displayLeft{
-  
+.displayLeft {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -233,34 +244,37 @@ text-shadow:none;
   align-items: center;
   width: 50%;
   height: 100%;
-  background:  none;
-
-  max-height: 100vh
+  background: none;
+  border-left: 1px solid #7c7c7c;
+  border-right: 1px solid #7c7c7c;
+  max-height: 100vh;
 }
 
-.displayLeft button{
-  background:#ffe600;
+.displayLeft button {
+  background: #ffe600;
   border: none;
   margin-top: 2vh;
-  padding:1vh;
+  padding: 1vh;
   font-family: IBM Plex Mono, monospace;
 }
 
-
-.displayLeft label{
+.displayLeft label {
   color: white;
 }
 
-.displaySelectedSong{
-  height: 30vh;
-  width: 15vw;
+.displaySelectedSong {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  width: 100%;
   margin-bottom: 5vh;
+  border-bottom: 1px solid #7c7c7c;
   background-color: #353535;
- 
 }
 
-
-.displaySelectSong{
+.displaySelectSong {
   font-family: IBM Plex Mono, monospace;
   background: transparent;
   border-style: solid;
@@ -268,7 +282,7 @@ text-shadow:none;
   color: white;
   height: 5vh;
   width: 15vw;
-  margin-bottom: 2vh
+  margin-bottom: 2vh;
 }
 
 .displaySelectedSong button {
@@ -279,83 +293,87 @@ text-shadow:none;
 
 .displaySelectedSong button:hover {
   transform: scale(1.07);
-  transition: all 0.5 ease
+  transition: all 0.5 ease;
 }
 
-.commentary{
+.commentary {
   font-family: IBM Plex Mono, monospace;
   background: transparent;
   border-style: solid;
   border-color: #ffe600;
   color: white;
   height: 15vh;
-  width: 15vw
+  width: 15vw;
 }
 
-.displaySelectedSong{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.displaySelectedSong p {
+  color: rgb(139, 139, 139);
 }
 
-.displaySelectedSong p{
-  color: rgb(139, 139, 139)
+.displaySelectedSong img {
+  width: 50%;
 }
 
-.displaySelectedSong img{
-  width: 100%;
- 
-}
-
-.displaySelectedSong h1{
+.displaySelectedSong h1 {
   color: white;
   font-weight: 600;
   font-size: 1em;
 }
 
-.displaySelectedSong h2{
+.displaySelectedSong h2 {
   color: white;
   font-weight: normal;
   font-size: 0.8em;
 }
 
-.buttonPlayPause{
+.buttonPlayPause {
+  background: #60606000;
+
+  color: #7c7c7c;
+
+  border-style: solid;
+
+  border-color: #7c7c7c;
+
+  padding: 1vh;
+
+  font-family: IBM Plex Mono, monospace;
+
+  text-shadow: none;
   margin-left: 0.5vw;
-  cursor: pointer
+  cursor: pointer;
 }
 
-.buttonPlayPause:hover{
+.buttonPlayPause:hover {
   background-color: #2e2e2e;
   color: white;
 }
 
-
 .buttonAdd:hover {
-  transform: scale(1.07)
+  transform: scale(1.07);
 }
 
 .menu {
   display: flex;
   flex-direction: column;
+  margin-left: 2vw;
 }
 
-
-.active{
+.active {
   color: #ffe600;
-  font-size: 2em;
-  font-weight:500;
-  letter-spacing: .3rem;
+  font-size: 1.5em;
+  font-weight: 500;
+  letter-spacing: 0.3rem;
 }
 
-.disabled{
+.disabled {
   color: #7c7c7c;
-  font-size: 2em;
-  font-weight:500;
-  letter-spacing: .3rem;
+  font-size: 1.5em;
+  font-weight: 500;
+  letter-spacing: 0.3rem;
 }
 
-.allRecommendations{
+.allRecommendations {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -367,52 +385,57 @@ text-shadow:none;
 .displayRecommendation {
   width: 45%;
   border: 1px solid #ffe600;
-  margin-bottom: 2vh;
+  margin-bottom: 5vh;
   padding: 1.5vh;
 }
 
-.displaySongRecommended img{
+.displaySongRecommended img {
   width: 50px;
-  height: 50px
+  height: 50px;
 }
 
 .displaySongRecommended {
   display: flex;
 }
 
-.songRecommendInfo h2{
-  color:  #ffe600;
+.songRecommendInfo h2 {
+  color: #ffe600;
   font-weight: 500;
-  font-size: 1em
+  font-size: 1em;
 }
 
-.songRecommendInfo h4{
-  color:  #ffffff;
+.songRecommendInfo h4 {
+  color: #ffffff;
   font-weight: 500;
-  font-size: 1em
+  font-size: 1em;
 }
 
-.recommendationText p{
+.recommendationText p {
   font-size: 1.25em;
   font-weight: normal;
   color: white;
   margin-top: 1vh;
   margin-bottom: 1vh;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
 }
 
-.recommendationDate p{
+.recommendationDate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recommendationDate p {
   font-size: 1em;
   font-weight: normal;
   color: #7c7c7c;
- 
 }
 
 .songRecommendInfo {
   margin-left: 1vw;
 }
 
-.userInfo{
+.userInfo {
   display: flex;
   align-items: center;
 }
@@ -421,26 +444,188 @@ text-shadow:none;
   font-weight: 300;
   font-size: 1em;
   color: white;
+  margin-left: 0.5vw;
 }
 
 .userInfo img {
   width: 50px;
-  border-radius: 50%
-  }
+  border-radius: 50%;
+}
 
-
-.app{
+.app {
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
 .displayWelcome {
   color: white;
-  margin-top: 2vh
+  margin-top: 2vh;
 }
 
-.displayInteraction{
+.displayInteraction {
   display: flex;
   flex-direction: column;
-  margin-top: 2vh
+  height: 50vh;
+  justify-content: center;
+}
+
+.displayFeed {
+  width: 100%;
+  height: 100vh;
+  margin-left: 10vw;
+  overflow: scroll;
+}
+
+.userInfo {
+  margin-bottom: 1vh;
+}
+
+.displayAllRecommendations {
+  margin-top: 5vh;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+
+.logo img {
+  width: 4vw;
+}
+
+.logo h1 {
+  color: #ffe600;
+  font-size: 1.5em;
+  font-weight: 500;
+  letter-spacing: 0.3rem;
+  margin-left: 1vw;
+}
+
+.displayLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #ffe600;
+}
+
+.displayInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.displayInput input {
+  font-family: IBM Plex Mono, monospace;
+  background: transparent;
+  border-style: solid;
+  border-color: #ffe600;
+  color: white;
+  height: 5vh;
+  width: 15vw;
+  margin-bottom: 2vh;
+}
+
+.displayInput label {
+  margin-bottom: 1vh;
+}
+
+.displayInput button {
+  background: #ffe600;
+
+  color: #7c7c7c;
+
+  border-style: solid;
+
+  border-color: #ffe600;
+
+  padding: 1vh;
+
+  font-family: IBM Plex Mono, monospace;
+
+  text-shadow: none;
+
+  cursor: pointer;
+}
+
+.displayRecommendation {
+  margin-top: 5vh;
+}
+
+.displayInput h2 {
+  color: #7c7c7c;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+  .active {
+    color: #ffe600;
+    font-size: 1.25em;
+    font-weight: 500;
+    letter-spacing: 0.3rem;
+  }
+
+  .disabled {
+    color: #7c7c7c;
+    font-size: 1.25em;
+    font-weight: 500;
+    letter-spacing: 0.3rem;
+  }
+
+  .displaySelectedSong img {
+    width: 70%;
+  }
+
+  .displaySearch {
+    display: flex;
+    height: 100vh;
+    width: 55vw;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: scroll;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .active {
+    color: #ffe600;
+    font-size: 1.5em;
+    font-weight: 500;
+    letter-spacing: 0.3rem;
+  }
+
+  .disabled {
+    color: #7c7c7c;
+    font-size: 1.5em;
+    font-weight: 500;
+    letter-spacing: 0.3rem;
+  }
+}
+
+
+.login-signup{
+  display: flex;
+  margin-top: 2vh;
+}
+
+.login-signup button{
+  background: none;
+
+  color: #ffe600;
+
+ border: 1px solid #ffe600;
+
+  padding: 1vh;
+
+  font-family: IBM Plex Mono, monospace;
+
+  text-shadow: none;
+
+  cursor: pointer;
+
+  margin-right: 1vw
 }

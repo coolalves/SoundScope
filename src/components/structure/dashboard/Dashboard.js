@@ -3,12 +3,13 @@ import React from "react";
 
 //css
 import "../../../styles/app.css";
+import logo from "../../../styles/logo.svg";
 
 //router
 import { useNavigate } from "react-router-dom";
 
 //firebase
-import { logout, useAuth, upload } from "../../../config/firebase";
+import { useAuth, upload } from "../../../config/firebase";
 import { useState, useEffect, useRef } from "react";
 import { users } from "../../../config/firebase";
 
@@ -98,29 +99,25 @@ export default function Dashboard() {
     setToRecommend(true);
   };
 
-  return (
-    <div className="app">
-      <Navbar />
+  console.log(username)
 
-      <div className="mainApp">
-       
-      
+  if (username != "") {
+    return (
+      <div className="app">
+        <Navbar recommended={recommended} toRecommend={toRecommend} />
 
-     
-
-        <PreviewPlayer />
-        {!recommended && toRecommend ? (
-          <Search username={username} />
-        ) : (
-
-        <div className="allRecommendations">  
-          <MyRecommendations username={username} />
+        <div className="mainApp">
+          <PreviewPlayer />
+          {!recommended && toRecommend ? (
+            <Search username={username} />
+          ) : (
+            <div className="allRecommendations">
+              <MyRecommendations username={username} />
+            </div>
+          )}
         </div>
 
-        )}
-      </div>
-
-      <div className="menu">
+        <div className="menu">
           <a
             className={
               toRecommend && !recommended
@@ -146,9 +143,27 @@ export default function Dashboard() {
             }}
           >
             <FaHeart />
-            MINHAS RECOMENDAÇÕES
+            RECOMENDADAS
           </a>
         </div>
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return (
+      <div className="displayLogin">
+        <div className="logo">
+          <img src={logo}></img>
+          <h1>SOUNDSCOPE</h1>
+        </div>
+
+        <p>Você não está logado. Para aceder a página, efetue o login.</p>
+
+        <div className="login-signup">
+          <button onClick={()=> navigate("/login")}>Login</button>
+
+          <button onClick={()=> navigate("/signup")}>Sign Up</button>
+        </div>
+      </div>
+    );
+  }
 }

@@ -16,7 +16,7 @@ const MyRecommendations = (props) => {
   return mysongs.map((e,key) => {
     return (
 
-      <RecommendedSong key={key} image={e.image} title={e.title} name = {e.name} date = {e.date} />
+      <RecommendedSong key={key} image={e.image} title={e.title} name = {e.name} date = {e.date} preview ={e.preview}/>
 
     );
   });

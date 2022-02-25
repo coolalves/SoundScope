@@ -3,6 +3,7 @@ import Signup from "../components/authentication/Signup";
 import Login from "../components/authentication/Login";
 import Dashboard from "../components/structure/dashboard/Dashboard";
 import Feed from "../components/structure/feed/Feed";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 export default function ProjectRoutes() {
   return (

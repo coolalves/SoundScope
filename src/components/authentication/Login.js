@@ -5,8 +5,7 @@ import { UseStorage } from "./Signup";
 import { useRecoilState } from "recoil";
 import { emailState } from "../../recoil/atoms/email";
 import { uidState } from "../../recoil/atoms/uid";
-
- 
+import logo from "../../styles/logo.svg";
 
 export default function Login() {
   const [email, setEmail] = useRecoilState(emailState);
@@ -18,48 +17,53 @@ export default function Login() {
   };
 
   return (
-    <>
-      <h2>Welcome</h2>
-
-      <label>Email</label>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value.trim());
-        }}
-        required
-      />
-
-      <label>Password</label>
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-        required
-      />
-
-      <button
-        onClick={async (e) => {
-          e.preventDefault();
-          await login(email, password)
-            .then((response) => {
-              alert("Successfully Logged In");
-              UserParam(response.user.uid); 
-              navigate("/dashboard/");
-            })
-            .catch((error) => alert(error.message));
-        }}
-        type="submit"
-      >
-        Log In
-      </button>
-
-      <div>
-        Need an account? <Link to="/signup">Sign Up</Link>
+    <div className="displayLogin">
+      <div className ="logo">
+        <img src={logo}></img>
+        <h1>SOUNDSCOPE</h1>
       </div>
-    </>
+
+      <div className="displayInput">
+        <label>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value.trim());
+          }}
+          required
+        />
+
+        <label>Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          required
+        />
+
+        <button
+          onClick={async (e) => {
+            e.preventDefault();
+            await login(email, password)
+              .then((response) => {
+                alert("Successfully Logged In");
+                UserParam(response.user.uid);
+                navigate("/dashboard/");
+              })
+              .catch((error) => alert(error.message));
+          }}
+          type="submit"
+        >
+          Log In
+        </button>
+
+        <div>
+          Need an account? <Link to="/signup">Sign Up</Link>
+        </div>
+      </div>
+    </div>
   );
 }

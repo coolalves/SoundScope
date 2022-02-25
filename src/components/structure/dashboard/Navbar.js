@@ -1,31 +1,35 @@
-import logoSongScope from "../../../styles/logoSongScope.svg";
+import logo from "../../../styles/logo.svg";
 import { logout, useAuth, upload } from "../../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atoms/username";
+import react, { useRef, useState } from "react";
 
-
-export default function Navbar() {
+export default function Navbar(props) {
   const navigate = useNavigate();
   const [username, setUsername] = useRecoilState(userState);
 
   return (
     <header>
-      <img src={logoSongScope}></img>
+      <div className="logo">
+        <img src={logo}></img>
+        <h1>SOUNDSCOPE</h1>
+      </div>
+
       <div>
         <a
           onClick={() => {
             navigate("/dashboard");
           }}
         >
-          Descobrir
+          RECOMENDAR
         </a>
         <a
           onClick={() => {
             navigate("/feed");
           }}
         >
-          Recomendados
+          DESCOBRIR
         </a>
 
         <a
@@ -34,15 +38,14 @@ export default function Navbar() {
             logout();
             alert("Logged Out");
             window.sessionStorage.clear();
+            setUsername("");
             navigate("/login");
           }}
         >
-          Log Out
+          LOG OUT
         </a>
 
-        <div className="displayWelcome">
-          welcome, {username} 
-        </div>
+        <div className="displayWelcome">welcome, {username}</div>
       </div>
     </header>
   );

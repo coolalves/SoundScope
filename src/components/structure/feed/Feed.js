@@ -1,16 +1,15 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import Navbar from "../dashboard/Navbar";
 import RecommendedSong from "../dashboard/RecommendedSong";
 
 import { songs } from "../../../config/firebase";
 
 export default function Feed() {
+  console.log(songs);
 
-  console.log(songs)
+  let mysongs = useRef([]);
 
-  let mysongs = useRef([])
-
- mysongs.current = songs.map((e, key) => {
+  mysongs.current = songs.map((e, key) => {
     return (
       <div>
         <div className="userInfo">
@@ -18,23 +17,25 @@ export default function Feed() {
           <h2>{e.recommendedby}</h2>
         </div>
 
-        <RecommendedSong key = {key} image = {e.image} title = {e.title} name = {e.name} date={e.date}/>
+        <RecommendedSong
+          key={key}
+          image={e.image}
+          title={e.title}
+          name={e.name}
+          date={e.date}
+        />
       </div>
     );
   });
 
-  console.log(mysongs)
+  console.log(mysongs);
 
   return (
-    <>
+    <div className="app">
       <Navbar />
-      <div>
-        <h1>Sugestão da Galera</h1>
-
-        <div>
-          {mysongs.current}
-        </div>
+      <div className="displayFeed">
+        <div className="displayAllRecommendations">{mysongs.current}</div>
       </div>
-    </>
+    </div>
   );
 }

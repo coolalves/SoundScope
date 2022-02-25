@@ -23,6 +23,7 @@ const Search = (props) => {
   let currentDate =
     day + "/" + (month + 1) + "/" + year + " - " + hour + "h" + minutes + "m";
 
+
   //console.log(currentDate)
 
   const [txtSong, setTxtSong] = useState("");
@@ -104,6 +105,7 @@ const Search = (props) => {
       recommendedby: props.username,
       title: selectedSongInfo.title,
       date: currentDate,
+      preview: selectedSongInfo.preview,
     });
   }
 
