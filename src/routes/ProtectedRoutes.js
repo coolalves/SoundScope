@@ -1,7 +1,6 @@
 import { Navigate, Outlet } from "react-router";
 import { useRecoilValue } from "recoil";
 import { getIsLogged } from "../recoil/selectors/getIslogged";
-import Login from "../components/authentication/Login";
 
 const useAuth = ()=> {
     const user = useRecoilValue(getIsLogged)

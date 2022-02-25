@@ -2,9 +2,6 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { addDoc } from "firebase/firestore";
 import { colRefSongs } from "../../../config/firebase";
-
-import { useRecoilState } from "recoil";
-import { currentsongState } from "../../../recoil/atoms/currentsong";
 import DisplaySong from "./DisplaySong";
 import SelectedSong from "./SelectedSong";
 
@@ -24,23 +21,15 @@ const Search = (props) => {
     day + "/" + (month + 1) + "/" + year + " - " + hour + "h" + minutes + "m";
 
 
-  //console.log(currentDate)
 
   const [txtSong, setTxtSong] = useState("");
   const [selectedSongInfo, setSelectedSongInfo] = useState([]);
-  const [song, setSong] = useState("");
-  const [play, setPlay] = useState(false);
-  const [songLink, setSongLink] = useState("");
   const [songs, setSongs] = useState([]);
-  const [currentSong, setCurrentSong] = useRecoilState(currentsongState);
   const txtRecommendation = useRef("")
 
-  let audio = new Audio(songLink);
-
-  // togglePlay = () => {};
 
   const txtSongHandler = (e) => {
-    if (e.target.value == "") {
+    if (e.target.value === "") {
       setSongs(initialSongs.current);
     }
 
@@ -67,9 +56,8 @@ const Search = (props) => {
     })
       .then((response) => {
         response.json().then((info) => {
-          if (info.data != undefined) {
+          if (info.data !== undefined) {
             setSongs(info.data);
-            console.log(songs);
           }
         });
       })

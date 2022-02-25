@@ -1,10 +1,9 @@
 import logo from "../../../styles/logo.svg";
 
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userState } from "../../../recoil/atoms/username";
-import react, { useRef, useState, useEffect } from "react";
-import { logout, useAuth, upload } from "../../../config/firebase";
+import { logout } from "../../../config/firebase";
 
 export default function Navbar(props) {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ export default function Navbar(props) {
   return (
     <header>
       <div className="logo">
-        <img src={logo}></img>
+        <img src={logo} alt="logo"></img>
         <h1>SOUNDSCOPE</h1>
       </div>
 
@@ -43,11 +42,10 @@ export default function Navbar(props) {
             navigate("/login");
           }}
         >
-          LOG OUT
+          SAIR
         </a>
 
-        <div className="displayWelcome">welcome, {username}</div>
-        
+        <div className="displayWelcome">Olá, {username}</div>
       </div>
     </header>
   );

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
-import { UseStorage } from "./Signup";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { emailState } from "../../recoil/atoms/email";
 import { uidState } from "../../recoil/atoms/uid";
 import { isLogged } from "../../recoil/atoms/islogged";
@@ -20,8 +19,8 @@ export default function Login() {
 
   return (
     <div className="displayLogin">
-      <div className ="logo">
-        <img src={logo}></img>
+      <div className="logo">
+        <img src={logo} alt="logo"></img>
         <h1>SOUNDSCOPE</h1>
       </div>
 
@@ -53,19 +52,18 @@ export default function Login() {
               .then((response) => {
                 alert("Successfully Logged In");
                 UserParam(response.user.uid);
-      
-                setIsLogged({loggedIn: true})
+                setIsLogged({ loggedIn: true });
                 navigate("/dashboard/");
               })
               .catch((error) => alert(error.message));
           }}
           type="submit"
         >
-          Log In
+          Entrar
         </button>
 
-        <div>
-          Need an account? <Link to="/signup">Sign Up</Link>
+        <div className="infoSign">
+          Novo por aqui? <Link to="/signup">Criar conta </Link>
         </div>
       </div>
     </div>

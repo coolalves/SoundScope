@@ -13,7 +13,7 @@ export default function Feed() {
     return (
       <div>
         <div className="userInfo">
-          <img src="http://www.jokopost.com/wp-content/uploads/2015/09/%D7%90%D7%99%D7%A7%D7%A1-commons.wikimedia.org_.png"></img>
+          <img src="https://www.legalwiz.in/wp-content/uploads/default-user-profile01-600x600.png" alt="profilepic"></img>
           <h2>{e.recommendedby}</h2>
         </div>
 
@@ -30,7 +30,6 @@ export default function Feed() {
     );
   });
 
-  console.log(mysongs);
 
   return (
     <div className="app">
